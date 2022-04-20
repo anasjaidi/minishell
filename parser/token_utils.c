@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   token_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 22:57:40 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/04/20 22:55:07 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/04/20 23:07:10 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	main(void)
+void	unclosed_quote(t_token **root)
 {
-	char	*str;
-	t_token	*root;
+	clr_lst(root, *root);
+	printf("unclosed quote\n");
+	*root = NULL;
+}
 
-	root = NULL;
-	while (1)
-	{
-		str = readline("Minishell@robin:");
-		if (str)
-			token(str, &root);
-		display_node(root);
-		clr_lst(&root, root);
-		root = NULL;
-	}
+int	invalid_token(t_token **root, char *str)
+{
+	clr_lst(root, *root);
+	*root = NULL;
+	printf("unexpected token\n");
+	return (get_last(str));
+}
+
+int	get_last(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		;
+	return (i);
 }

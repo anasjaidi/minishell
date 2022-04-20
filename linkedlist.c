@@ -6,29 +6,30 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 16:09:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/20 22:59:03 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token *new_node(char  *str, int flag)
+t_token	*new_node(char *str, int flag)
 {
-    t_token *new;
+	t_token	*new;
 
-    if (!(new = (t_token *)malloc(sizeof(t_token))))
-        return (NULL);
-    new->str = str;
-    new->type = flag;
-    new->prev = new;
-    new->next = new;
-    return (new);
+	new = (t_token *)malloc(sizeof(t_token));
+	if (!new)
+		return (NULL);
+	new->str = str;
+	new->type = flag;
+	new->prev = new;
+	new->next = new;
+	return (new);
 }
 
-void	append_in_end(t_token **root, char  *str, int flag)
+void	append_in_end(t_token **root, char *str, int flag)
 {
-	t_token *tmp;
-	t_token *p;
+	t_token	*tmp;
+	t_token	*p;
 
 	tmp = new_node(str, flag);
 	if (!*root)
@@ -52,11 +53,11 @@ void	display_node(t_token *root)
 		return ;
 	else
 	{
- 		temp = temp->prev;
-		while(root != temp)
+		temp = temp->prev;
+		while (root != temp)
 		{
 			printf("[%d]=>[%s]\n", root->type, root->str);
- 			root = root->next;
+			root = root->next;
 		}
 		printf("[%d]=>[%s]\n", root->type, root->str);
 	}
