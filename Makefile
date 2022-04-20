@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+         #
+#    By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 16:07:16 by ajaidi            #+#    #+#              #
-#    Updated: 2022/04/13 16:30:22 by ajaidi           ###   ########.fr        #
+#    Updated: 2022/04/19 22:38:40 by ajaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror
 
 # -I
 RL_INCLUDE = $(addprefix $(shell brew --prefix readline), /include)
@@ -21,7 +21,7 @@ RL_INCLUDE = $(addprefix $(shell brew --prefix readline), /include)
 RL_LIB = $(addprefix $(shell brew --prefix readline), /lib)
 LIB = minishell.h
 
-SRCS = minishell.c
+SRCS = minishell.c linkedlist.c parser/token.c
 
 OBJ = $(SRCS:.c=.o)
 all: $(NAME)
