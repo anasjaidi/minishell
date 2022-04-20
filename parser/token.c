@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 15:01:27 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/20 16:05:15 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ int	take_colon(char *str, t_token **root)
 		add_item(str, str + i, WORD, root);
 		add_item(str + i, str + i + 1, SQUOTE, root);
 	}
-	// else if (!str[i])
-	// 	unclosed_quote();
+	else if (!str[i])
+	 	return (unclosed_quote(root), i + 1);
 	return (i + 2);
 }
 
@@ -175,9 +175,16 @@ int	take_dquote(char *str, t_token **root)
 		add_item(str + last + 1, str + i, WORD, root);
 		add_item(str + i, str + i + 1, DQUOTE, root);
 	}
-	// else if (!str[i])
-	// 	unclosed_quote();
+	else if (!str[i])
+	 	return (unclosed_quote(root), i + 1);
 	return (i + 2);
+}
+
+void	unclosed_quote(t_token **root)
+{
+	clr_lst(root, *root);
+	printf("unclosed quote\n");
+	*root = NULL;	
 }
 
 int	take_qvar(char *str, t_token **root)

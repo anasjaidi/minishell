@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 14:30:07 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/20 16:09:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	display_node(t_token *root)
 
 	temp = root;
 	if (!root)
-		printf("List is empty\n");
+		return ;
 	else
 	{
  		temp = temp->prev;
@@ -64,6 +64,8 @@ void	display_node(t_token *root)
 
 void	clr_lst(t_token **root, t_token *node)
 {
+	if (!node)
+		return ;
 	if (node == (*root)->prev)
 		return ((void)free(node));
 	clr_lst(root, node->next);

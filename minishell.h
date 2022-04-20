@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 14:37:14 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/20 15:10:43 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		check_flag(char *str, int q);
 int 	take_wp(char *str, t_token **root);
 int		take_less_more(char *str, t_token **root);
 int 	take_var(char *str, t_token **root);
+void	unclosed_quote(t_token **root);
 int 	check_char(char *str, t_token **root);
 void	token(char *str, t_token **root);
 int	take_qvar(char *str, t_token **root);
