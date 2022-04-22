@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:54:31 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 23:07:21 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/21 17:02:32 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,6 @@ int	take_wp(char *str, t_token **root)
 	return (0);
 }
 
-int	check_flag(char *str, int q, t_token **root)
-{
-	if (*str == '|')
-	{
-		if (q == 1)
-			return (PIPE);
-		else
-			return (OR);
-	}
-	else if (*str == '&')
-		return (AND);
-	else if (*str == '*')
-		return (WILD);
-	return (0);
-}
-
 int	take_colon(char *str, t_token **root)
 {
 	int	i;
@@ -77,4 +61,13 @@ int	take_colon(char *str, t_token **root)
 	else if (!str[i])
 		return (unclosed_quote(root), (i + 1));
 	return (i + 2);
+}
+
+int	take_par(char *str, t_token **root)
+{
+	if (*str == '(')
+		add_item(str, str + 1, OPAR, root);
+	else
+		add_item(str, str + 1, CPAR, root);
+	return (1);
 }

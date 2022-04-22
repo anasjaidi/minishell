@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:51:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 23:07:16 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/21 21:20:15 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ int	take_dquote(char *str, t_token **root)
 		}
 		i++;
 	}
+	last = check_closed_dq(root, str, i, last);
+	return (last);
+}
+
+int	check_closed_dq(t_token **root, char	*str, int i, int last)
+{
 	if (str [i] == '\"' && last == 0)
 	{
 		add_item(str, str + i, WORD, root);
@@ -65,16 +71,6 @@ int	take_qvar(char *str, t_token **root)
 			if (str[i] == comp[j])
 				return (add_item(str, str + i, VAR, root), i);
 	}
-	return (i);
-}
-
-int	calc_size(char *start, char *end)
-{
-	int	i;
-
-	i = 1;
-	while (start++ != end)
-		i++;
 	return (i);
 }
 

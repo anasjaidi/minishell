@@ -6,7 +6,7 @@
 #    By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/13 16:07:16 by ajaidi            #+#    #+#              #
-#    Updated: 2022/04/20 23:07:01 by ajaidi           ###   ########.fr        #
+#    Updated: 2022/04/21 21:22:37 by ajaidi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ RL_INCLUDE = $(addprefix $(shell brew --prefix readline), /include)
 RL_LIB = $(addprefix $(shell brew --prefix readline), /lib)
 LIB = minishell.h
 
-SRCS = minishell.c linkedlist.c parser/token.c parser/token2.c parser/token3.c parser/token_utils.c
+SRCS = minishell.c linkedlist.c parser/token.c parser/token2.c parser/token3.c parser/token_utils.c syntax/syntax.c
 
 OBJ = $(SRCS:.c=.o)
-all: $(NAME)
+all: $(NAME) clean
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -L $(RL_LIB) -lreadline -o $(NAME)

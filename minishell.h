@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 23:03:39 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/21 21:27:38 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,16 @@
 # define LESS 3
 # define GREAT 4
 # define WORD 5
-# define PIPE 6
-# define TILD 7
-# define WSPACE 8
-# define SQUOTE 9
-# define DQUOTE 10
-# define AND 11
-# define OR 12
-# define WILD 13
+# define WSPACE 6
+# define SQUOTE 7
+# define DQUOTE 8
+# define OPAR 9
+# define PIPE 10
+# define TILD 11
+# define AND 12
+# define OR 13
+# define WILD 14
+# define CPAR 15
 
 typedef struct s_token
 {
@@ -40,6 +42,8 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
+int		calc_size(char *start, char *end);
+int		take_par(char *str, t_token **root);
 int		take_word(char *str, t_token **root);
 t_token	*new_node(char *str, int flag);
 void	display_node(t_token *root);
@@ -59,4 +63,6 @@ void	clr_lst(t_token **root, t_token *node);
 int		take_space(char *str, t_token **root);
 int		get_last(char *str);
 int		invalid_token(t_token **root, char *str);
+int		check_closed_dq(t_token **root, char	*str, int i, int last);
+void	check_syntax(t_token **root);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 23:06:09 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/21 21:21:16 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	token(char *str, t_token **root)
 	{
 		i += check_char(str + i, root);
 	}
+	if (*root)
+		check_syntax(root);
 }
 
 int	check_char(char *str, t_token **root)
 {
-	if (*str == '$')
+	if (*str == ')' || *str == '(')
+		return (take_par(str, root));
+	else if (*str == '$')
 		return (take_var(str, root));
 	else if (*str == 60 || *str == 62)
 		return (take_less_more(str, root));
@@ -35,7 +39,7 @@ int	check_char(char *str, t_token **root)
 		return (add_item(str, str + 1, TILD, root), 1);
 	else if (*str == '\'' || *str == '\"')
 		return (take_colon(str, root));
-	else if (*str >= 9 && *str <= 13 || (*str == 32))
+	else if ((*str >= 9 && *str <= 13) || (*str == 32))
 		return (take_space(str, root));
 	else
 		return (take_word(str, root));
@@ -65,7 +69,7 @@ int	take_space(char *str, t_token **root)
 	int	i;
 
 	i = 0;
-	while (str[i] >= 9 && str[i] <= 13 || str[i] == 32)
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	add_item(str, str + i, WSPACE, root);
 	return (i);
