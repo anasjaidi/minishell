@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 03:22:18 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/23 18:25:43 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	check_syntax(t_token **root)
 {
 	t_token	*temp;
 
-	if (!check_begin(*root))
+	if (!check_begin(get_right(root, (*root)->prev)))
 		return ((void)(syntax_error(root)));
-	temp = (*root);
+	temp = get_right(root, (*root)->prev);
 	while (temp != (*root)->prev)
 	{
+		temp = get_right(root, temp);
 		if (!check_list(root, temp))
 			return ((void)(syntax_error(root)));
-		temp = temp->next;
 	}
 	if (!check_list(root, temp))
 		return ((void)(syntax_error(root)));
@@ -57,49 +57,49 @@ int	check_list(t_token **head, t_token *root)
 
 int	check_wp(t_token **head, t_token *root)
 {
-	int	t;
+	t_token	*t;
 
 	t = get_right(head, root);
-	if (!(t >= 0 && t <= 11) || t == 16)
+	if (!(t->type >= 0 && t->type <= 11) || t->type == 16)
 		return (0);
 	return (1);
 }
 
 int	check_cpar(t_token **head, t_token *root)
 {
-	int	t;
+	t_token	*t;
 
 	t = get_right(head, root);
-	if (!(t >= 12 && t <= 15) && (t != 6))
+	if (!(t->type >= 12 && t->type <= 15) && (t->type != 6))
 		return (0);
 	return (1);
 }
 
 int	check_red(t_token **head, t_token *root)
 {
-	int	t;
+	t_token	*t;
 
 	t = get_right(head, root);
-	if ((!(t >= 5 && t <= 8) && (t != 0) && (t != 15)\
-		&& (t != 10) && (t != 11)) || t == 16)
+	if ((!(t->type >= 5 && t->type <= 8) && (t->type != 0) && (t->type != 15) \
+		&& (t->type != 10) && (t->type != 11)) || t->type == 16)
 		return (0);
 	return (1);
 }
 
-int	get_right(t_token **head, t_token *root)
+t_token	*get_right(t_token **head, t_token *root)
 {
 	if (root->next->type == 6)
 	{
 		if (root->next->next != *head)
-			return (root->next->next->type);
+			return (root->next->next);
 		else
-			return (16);
+			return (NULL);
 	}
 	else
 	{
 		if (root->next != *head)
-			return (root->next->type);
+			return (root->next);
 		else
-			return (16);
+			return (NULL);
 	}
 }

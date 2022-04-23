@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 03:16:20 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/23 18:23:20 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,5 @@ int		check_list(t_token **head, t_token *root);
 int		check_red(t_token **head, t_token *root);
 int		check_cpar(t_token **head, t_token *root);
 int		check_wp(t_token **head, t_token *root);
-int		get_right(t_token **head, t_token *root);
+t_token	*get_right(t_token **head, t_token *root);
 #endif
