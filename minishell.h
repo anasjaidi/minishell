@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/22 23:03:52 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/23 03:16:20 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,22 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define VAR 0
+# define VAR 0 //
 # define DGREAT 1
 # define DLESS 2
 # define LESS 3
 # define GREAT 4
-# define WORD 5
-# define WSPACE 6
-# define SQUOTE 7
-# define DQUOTE 8
+# define WORD 5 //
+# define WSPACE 6 // 
+# define SQUOTE 7 //
+# define DQUOTE 8 //
 # define OPAR 9
-# define WILD 10
-# define TILD 11
+# define WILD 10 // 
+# define TILD 11 //
 # define AND 12
 # define OR 13
 # define PIPE 14
-# define CPAR 15
+# define CPAR 15 //
 
 typedef struct s_token
 {
@@ -67,5 +67,9 @@ int		check_closed_dq(t_token **root, char	*str, int i, int last);
 void	check_syntax(t_token **root);
 int		check_begin(t_token *root);
 void	syntax_error(t_token **root);
-int		check_list(t_token *root);
+int		check_list(t_token **head, t_token *root);
+int		check_red(t_token **head, t_token *root);
+int		check_cpar(t_token **head, t_token *root);
+int		check_wp(t_token **head, t_token *root);
+int		get_right(t_token **head, t_token *root);
 #endif
