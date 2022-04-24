@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 18:25:43 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/24 02:34:31 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,42 @@ void	check_syntax(t_token **root)
 {
 	t_token	*temp;
 
-	if (!check_begin(get_right(root, (*root)->prev)))
+	if ((*root)->type == 6 && (*root)->next)
+		temp = (*root)->next;
+	else if ((*root)->type != 6)
+		temp = *root;
+	else
+		return ;
+	if (!check_begin(temp))
 		return ((void)(syntax_error(root)));
-	temp = get_right(root, (*root)->prev);
-	while (temp != (*root)->prev)
+	while (temp)
 	{
-		temp = get_right(root, temp);
 		if (!check_list(root, temp))
 			return ((void)(syntax_error(root)));
+		temp = get_right(root, temp);
 	}
-	if (!check_list(root, temp))
-		return ((void)(syntax_error(root)));
+	check_bal_par(root);
+}
+
+void	check_bal_par(t_token **root)
+{
+	int		l;
+	t_token	*temp;
+
+	l = 0;
+	temp = *root;
+	while (temp)
+	{
+		if (temp->type == 9)
+			l++;
+		else if (temp->type == 15)
+			l--;
+		if (l < 0)
+			return ((void)(syntax_error(root)));
+		temp = temp->next;
+	}
+	if (l)
+		syntax_error(root);
 }
 
 int	check_begin(t_token *root)
@@ -53,53 +78,4 @@ int	check_list(t_token **head, t_token *root)
 	else if (root->type >= 1 && root->type <= 4)
 		return (check_red(head, root));
 	return (1);
-}
-
-int	check_wp(t_token **head, t_token *root)
-{
-	t_token	*t;
-
-	t = get_right(head, root);
-	if (!(t->type >= 0 && t->type <= 11) || t->type == 16)
-		return (0);
-	return (1);
-}
-
-int	check_cpar(t_token **head, t_token *root)
-{
-	t_token	*t;
-
-	t = get_right(head, root);
-	if (!(t->type >= 12 && t->type <= 15) && (t->type != 6))
-		return (0);
-	return (1);
-}
-
-int	check_red(t_token **head, t_token *root)
-{
-	t_token	*t;
-
-	t = get_right(head, root);
-	if ((!(t->type >= 5 && t->type <= 8) && (t->type != 0) && (t->type != 15) \
-		&& (t->type != 10) && (t->type != 11)) || t->type == 16)
-		return (0);
-	return (1);
-}
-
-t_token	*get_right(t_token **head, t_token *root)
-{
-	if (root->next->type == 6)
-	{
-		if (root->next->next != *head)
-			return (root->next->next);
-		else
-			return (NULL);
-	}
-	else
-	{
-		if (root->next != *head)
-			return (root->next);
-		else
-			return (NULL);
-	}
 }

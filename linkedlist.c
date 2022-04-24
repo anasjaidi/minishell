@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/20 22:59:03 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/23 21:53:44 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_token	*new_node(char *str, int flag)
 		return (NULL);
 	new->str = str;
 	new->type = flag;
-	new->prev = new;
-	new->next = new;
+	new->prev = NULL;
+	new->next = NULL;
 	return (new);
 }
 
@@ -36,9 +36,9 @@ void	append_in_end(t_token **root, char *str, int flag)
 		*root = tmp;
 	else
 	{
-		p = (*root)->prev;
-		tmp->next = *root;
-		(*root)->prev = tmp;
+		p = *root;
+		while (p->next)
+			p = p->next;
 		p->next = tmp;
 		tmp->prev = p;
 	}
@@ -50,25 +50,22 @@ void	display_node(t_token *root)
 
 	temp = root;
 	if (!root)
-		return ;
+		printf("List is empty\n");
 	else
 	{
-		temp = temp->prev;
-		while (root != temp)
+		temp = root;
+		while (temp)
 		{
-			printf("[%d]=>[%s]\n", root->type, root->str);
-			root = root->next;
+			printf("[%d]=>[%s]\n", temp->type, temp->str);
+			temp = temp->next;
 		}
-		printf("[%d]=>[%s]\n", root->type, root->str);
 	}
 }
 
 void	clr_lst(t_token **root, t_token *node)
 {
-	if (!node)
+	if (node == NULL)
 		return ;
-	if (node == (*root)->prev)
-		return ((void)free(node));
 	clr_lst(root, node->next);
 	free(node);
 }

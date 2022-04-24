@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/21 21:21:16 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/23 22:19:32 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	take_word(char *str, t_token **root)
 	int		i;
 
 	i = -1;
-	comp = "&|\'\"$*<>~ \t\r\f\v\n";
+	comp = "&|\'\"$*<>~ \t\r\f\v\n()";
 	while (str[++i])
 	{
 		j = -1;
@@ -82,7 +82,7 @@ int	take_var(char *str, t_token **root)
 	int		j;
 
 	i = 0;
-	comp = "&|\'\"$*<>~ \t\r\f\v\n";
+	comp = "&|\'\"$*<>~ \t\r\f\v\n()";
 	while (str[++i])
 	{
 		j = -1;

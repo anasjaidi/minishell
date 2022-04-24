@@ -6,12 +6,13 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 18:23:20 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/24 02:34:49 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
 # include <stdio.h>
 # include <readline/readline.h>
 # include <stdlib.h>
@@ -72,4 +73,6 @@ int		check_red(t_token **head, t_token *root);
 int		check_cpar(t_token **head, t_token *root);
 int		check_wp(t_token **head, t_token *root);
 t_token	*get_right(t_token **head, t_token *root);
+t_token	*get_left(t_token **head, t_token *root);
+void	check_bal_par(t_token **root);
 #endif
