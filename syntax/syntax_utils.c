@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 02:33:19 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/24 04:32:16 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/24 05:49:29 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_wp(t_token *root)
 	if (root->type == 9 && t && \
 		!(t->type >= 12 && t->type <= 14) && t->type != 9)
 		return (0);
-	t = get_right( root);
+	t = get_right(root);
 	if (!t)
 		return (0);
 	if (!(t->type >= 0 && t->type <= 11))
