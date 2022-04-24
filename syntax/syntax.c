@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/24 02:34:31 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/24 04:34:36 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	check_syntax(t_token **root)
 		return ((void)(syntax_error(root)));
 	while (temp)
 	{
-		if (!check_list(root, temp))
+		if (!check_list(temp))
 			return ((void)(syntax_error(root)));
-		temp = get_right(root, temp);
+		temp = get_right(temp);
 	}
 	check_bal_par(root);
 }
@@ -69,13 +69,13 @@ void	syntax_error(t_token **root)
 	printf("syntax Eroor\n");
 }
 
-int	check_list(t_token **head, t_token *root)
+int	check_list(t_token *root)
 {
 	if ((root->type >= 12 && root->type <= 14) || root->type == 9)
-		return (check_wp(head, root));
+		return (check_wp(root));
 	else if (root->type == 15)
-		return (check_cpar(head, root));
+		return (check_cpar(root));
 	else if (root->type >= 1 && root->type <= 4)
-		return (check_red(head, root));
+		return (check_red(root));
 	return (1);
 }

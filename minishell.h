@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/24 02:34:49 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/04/24 04:33:44 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ int		check_closed_dq(t_token **root, char	*str, int i, int last);
 void	check_syntax(t_token **root);
 int		check_begin(t_token *root);
 void	syntax_error(t_token **root);
-int		check_list(t_token **head, t_token *root);
-int		check_red(t_token **head, t_token *root);
-int		check_cpar(t_token **head, t_token *root);
-int		check_wp(t_token **head, t_token *root);
-t_token	*get_right(t_token **head, t_token *root);
-t_token	*get_left(t_token **head, t_token *root);
+int		check_list(t_token *root);
+int		check_red(t_token *root);
+int		check_cpar(t_token *root);
+int		check_wp(t_token *root);
+t_token	*get_right(t_token *root);
+t_token	*get_left(t_token *root);
 void	check_bal_par(t_token **root);
 #endif
