@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/24 04:33:44 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/20 22:18:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ typedef struct s_token
 	int				type;
 	struct s_token	*next;
 }	t_token;
+
+typedef struct s_tree
+{
+	char			*str;
+	int				type;
+	struct s_tree	**childs;
+}	t_tree;
 
 int		calc_size(char *start, char *end);
 int		take_par(char *str, t_token **root);
