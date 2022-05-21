@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 22:19:32 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/21 01:18:18 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	token(char *str, t_token **root)
 {
 	int	i;
+	t_tree	*head;
 
 	i = 0;
 	while (str[i])
@@ -22,7 +23,10 @@ void	token(char *str, t_token **root)
 		i += check_char(str + i, root);
 	}
 	if (*root)
+	{
 		check_syntax(root);
+		get_ast(root, head)
+	}
 }
 
 int	check_char(char *str, t_token **root)

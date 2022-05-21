@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/20 22:18:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/21 01:23:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,10 @@ typedef struct s_token
 
 typedef struct s_tree
 {
+	struct s_tree	*left;
 	char			*str;
 	int				type;
-	struct s_tree	**childs;
+	struct s_tree	*right;
 }	t_tree;
 
 int		calc_size(char *start, char *end);
