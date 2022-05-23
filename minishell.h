@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/21 01:23:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/23 21:00:59 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,46 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_tree
-{
-	struct s_tree	*left;
-	char			*str;
+typedef struct	s_command {
+	char			*content;
 	int				type;
-	struct s_tree	*right;
+	struct s_command *next;
+}	t_command;
+
+typedef	struct s_tree
+{
+	int				type;
 }	t_tree;
 
+typedef struct s_cmd {
+	int type;
+	struct s_command	*next;
+}	t_cmd;
+
+typedef struct s_sub {
+	int type;
+	struct s_tree	*next;
+}	t_csub;
+
+
+typedef	struct	s_wp
+{
+	int				type;
+	struct s_tree	*left;	
+	struct s_tree	*right;	
+}	t_wp;
+
+typedef	struct	s_redir
+{
+	int				type;
+	char			*file;
+	int				fd;
+	int				mode;
+	int				type;
+	struct s_tree	*next;	
+}	t_redir;
+
+t_tree	*get_ast(t_list **head);
 int		calc_size(char *start, char *end);
 int		take_par(char *str, t_token **root);
 int		take_word(char *str, t_token **root);

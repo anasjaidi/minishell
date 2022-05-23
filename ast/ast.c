@@ -6,13 +6,13 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/21 01:21:57 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/22 02:48:42 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
+// https://freecoursesite.com/the-web-developer-bootcamp-37/
 /*
 	<cmdline>	::= <block>
 		| <block> (";" | "&") <cmdline>
@@ -34,7 +34,27 @@
 	<filename>	::= token WORD | token VAR | token GROUP
 */
 
-void	get_ast(t_list **head, t_tree **root)
+t_tree	*get_ast(t_list **head)
 {
+	t_tree	*root;
+
+	root = get_block(head);
+	return (root);
+}
+
+t_tree	*get_block(t_list **head)
+{
+	t_tree	*root;
+	t_list	*tmp;	
+
+	tree = get_command(head);
+	tmp = *head;
+	while (tmp)
+	{
+		if (tmp->type >= 12 && tmp->type <= 13)
+			root = get_block(&tmp);
+	} 
+
 	
+	return (root);
 }

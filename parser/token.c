@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/21 01:18:18 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/22 02:41:40 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	token(char *str, t_token **root)
 {
-	int	i;
+	int		i;
 	t_tree	*head;
 
 	i = 0;
@@ -25,7 +25,7 @@ void	token(char *str, t_token **root)
 	if (*root)
 	{
 		check_syntax(root);
-		get_ast(root, head)
+		head = get_ast(root)
 	}
 }
 

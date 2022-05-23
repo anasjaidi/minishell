@@ -6,7 +6,7 @@
 /*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/20 22:15:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/21 01:24:48 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(void)
 	{
 		str = readline("Minishell@robin:");
 		if (str)
-			token(str, &root);
+			token(str, &root, &head);
 		clr_lst(&root, root);
 		root = NULL;
 	}
