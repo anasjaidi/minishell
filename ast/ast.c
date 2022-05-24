@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/24 04:23:56 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/24 21:20:02 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ t_tree	*get_block(t_token **head)
 	{
 		if ((*head)->type >= 12 && (*head)->type <= 13)
 		{
-			right = get_pipe(*head);
-			ret = get_wp(get_type(*head), left, right);
+			*head = get_right(*head);
 			left = (t_tree*)ret;
+			right = get_pipe(head);
+			ret = get_wp(get_type(get_left(*head)), left, right);
+			continue ;
 		}
 		*head = get_right(*head);
 	}
@@ -75,29 +77,30 @@ t_tree	*get_pipe(t_token **head)
 	t_wp	*ret;
 	t_tree	*left;
 	t_tree	*right;
-	t_token	*tmp;
 
 	left = get_command(head);
 	while (*head && (*head)->type != 12 && (*head)->type != 13 && (*head)->type != 15)
 	{
-		if (tmp->type == 14)
+		if ((*head)->type == 14)
 		{
-			right = get_command(&(tmp->next));
-			ret = get_wp(get_type(tmp), left, right);
+			*head = get_right(*head);
+			right = get_command(head);
+			ret = get_wp(get_type(get_left(*head)), left, right);
 			left = (t_tree*)ret;
 		}
-		tmp = get_right(tmp);
+		*head = get_right(*head);
 	}
 	return ((t_tree*)ret);
 }
 t_tree	*get_command(t_token **head)
 {
-	t_token	*tmp;
 	t_sub	*ret;
 	t_tree	*next;
 
-	tmp = get_right(*head);
-	if (tmp->type == 9)
-		ret->next = get_block(&tmp->next);
+	if ((*head)->type == 9)
+	{
+		*head = get_right(*head);
+		ret->next = get_block(head);
+	}
 
 }
