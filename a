@@ -1,0 +1,13 @@
+total 2160
+drwxr-xr-x  13 ajaidi  candidate   442B May 24 03:39 .git
+drwxr-xr-x   3 ajaidi  candidate   102B May 24 00:17 .vscode
+-rwxrwxrwx   1 ajaidi  candidate   1.5K May 24 00:17 Makefile
+-rwxrwxrwx   1 ajaidi  candidate    11B May 24 00:42 README.md
+-rw-r--r--   1 ajaidi  candidate     0B May 24 03:58 a
+drwxrwxrwx   4 ajaidi  candidate   136B May 24 00:24 ast
+-rwxrwxrwx   1 ajaidi  candidate   1.7K May 24 00:17 linkedlist.c
+-rwxrwxrwx   1 ajaidi  candidate   1.1K May 24 00:22 minishell.c
+-rwxrwxrwx   1 ajaidi  candidate   3.4K May 24 03:48 minishell.h
+drwxrwxrwx   6 ajaidi  candidate   204B May 24 00:22 parser
+-rwxrwxrwx   1 ajaidi  candidate   1.0M May 24 00:25 random.excalidraw
+drwxrwxrwx   4 ajaidi  candidate   136B May 24 00:22 syntax

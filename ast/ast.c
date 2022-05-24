@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/24 02:22:12 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/24 04:23:56 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,20 @@
 	<filename>	::= token WORD | token VAR | token GROUP
 */
 
-
-t_tree	*get_block(t_token **head)
+t_tree	*get_full(t_token **head)
 {
 	t_wp	*ret;
-	t_tree	*left;
-	t_tree	*right;
 	t_token	*tmp;
 
-	left = get_pipe(head);
 	tmp = *head;
 	while (tmp)
 	{
-		if (tmp->type >= 12 && tmp->type <= 13)
-		{
-			right = get_pipe(&(tmp->next));
-			ret = get_wp(get_type(tmp), left, right);
-			left = ret;
-		}
-		tmp = tmp->next;
+		if (tmp == *head && tmp->type != 6)
+			;
+		else
+			tmp = get_right(tmp);
+		get_block(&tmp);
 	}
-	return (ret);
 }
 
 t_tree	*get_block(t_token **head)
@@ -62,19 +55,49 @@ t_tree	*get_block(t_token **head)
 	t_wp	*ret;
 	t_tree	*left;
 	t_tree	*right;
+
+	left = get_pipe(head);
+	while (*head && (*head)->type != 15)
+	{
+		if ((*head)->type >= 12 && (*head)->type <= 13)
+		{
+			right = get_pipe(*head);
+			ret = get_wp(get_type(*head), left, right);
+			left = (t_tree*)ret;
+		}
+		*head = get_right(*head);
+	}
+	return ((t_tree*)ret);
+}
+
+t_tree	*get_pipe(t_token **head)
+{
+	t_wp	*ret;
+	t_tree	*left;
+	t_tree	*right;
 	t_token	*tmp;
 
 	left = get_command(head);
-	tmp = *head;
-	while (tmp)
+	while (*head && (*head)->type != 12 && (*head)->type != 13 && (*head)->type != 15)
 	{
 		if (tmp->type == 14)
 		{
 			right = get_command(&(tmp->next));
 			ret = get_wp(get_type(tmp), left, right);
-			left = ret;
+			left = (t_tree*)ret;
 		}
-		tmp = tmp->next;
+		tmp = get_right(tmp);
 	}
-	return (ret);
+	return ((t_tree*)ret);
+}
+t_tree	*get_command(t_token **head)
+{
+	t_token	*tmp;
+	t_sub	*ret;
+	t_tree	*next;
+
+	tmp = get_right(*head);
+	if (tmp->type == 9)
+		ret->next = get_block(&tmp->next);
+
 }

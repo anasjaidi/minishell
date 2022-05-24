@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/24 02:22:07 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/24 03:48:04 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ typedef	struct	s_redir
 	char			*filename;
 	int				fd;
 	int				mode;
-	int				type;
 	struct s_tree	*next;	
 }	t_redir;
 
@@ -106,6 +105,7 @@ int		take_qvar(char *str, t_token **root);
 void	clr_lst(t_token **root, t_token *node);
 int		take_space(char *str, t_token **root);
 int		get_last(char *str);
+t_tree	*get_pipe(t_token **head);
 int		invalid_token(t_token **root, char *str);
 int		check_closed_dq(t_token **root, char	*str, int i, int last);
 void	check_syntax(t_token **root);
