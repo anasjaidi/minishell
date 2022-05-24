@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/23 21:00:59 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/24 02:22:07 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_cmd {
 typedef struct s_sub {
 	int type;
 	struct s_tree	*next;
-}	t_csub;
+}	t_sub;
 
 
 typedef	struct	s_wp
@@ -75,16 +75,19 @@ typedef	struct	s_wp
 typedef	struct	s_redir
 {
 	int				type;
-	char			*file;
+	char			*filename;
 	int				fd;
 	int				mode;
 	int				type;
 	struct s_tree	*next;	
 }	t_redir;
 
-t_tree	*get_ast(t_list **head);
+t_tree  *get_wp(int type, t_tree *left, t_tree *right);
+t_tree  *get_redir(int type, t_tree *next, int fd, int mode, char *filename);
 int		calc_size(char *start, char *end);
 int		take_par(char *str, t_token **root);
+t_tree  *get_cmd(t_command *next);
+t_tree  *get_sub(t_tree *next);
 int		take_word(char *str, t_token **root);
 t_token	*new_node(char *str, int flag);
 void	display_node(t_token *root);

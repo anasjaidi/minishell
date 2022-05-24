@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/22 02:48:42 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/24 02:22:12 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,47 @@
 	<filename>	::= token WORD | token VAR | token GROUP
 */
 
-t_tree	*get_ast(t_list **head)
+
+t_tree	*get_block(t_token **head)
 {
-	t_tree	*root;
+	t_wp	*ret;
+	t_tree	*left;
+	t_tree	*right;
+	t_token	*tmp;
 
-	root = get_block(head);
-	return (root);
-}
-
-t_tree	*get_block(t_list **head)
-{
-	t_tree	*root;
-	t_list	*tmp;	
-
-	tree = get_command(head);
+	left = get_pipe(head);
 	tmp = *head;
 	while (tmp)
 	{
 		if (tmp->type >= 12 && tmp->type <= 13)
-			root = get_block(&tmp);
-	} 
+		{
+			right = get_pipe(&(tmp->next));
+			ret = get_wp(get_type(tmp), left, right);
+			left = ret;
+		}
+		tmp = tmp->next;
+	}
+	return (ret);
+}
 
-	
-	return (root);
+t_tree	*get_block(t_token **head)
+{
+	t_wp	*ret;
+	t_tree	*left;
+	t_tree	*right;
+	t_token	*tmp;
+
+	left = get_command(head);
+	tmp = *head;
+	while (tmp)
+	{
+		if (tmp->type == 14)
+		{
+			right = get_command(&(tmp->next));
+			ret = get_wp(get_type(tmp), left, right);
+			left = ret;
+		}
+		tmp = tmp->next;
+	}
+	return (ret);
 }

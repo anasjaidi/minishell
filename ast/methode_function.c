@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methode_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 03:37:19 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/23 21:01:17 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/24 02:21:39 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_tree  *get_redir(int type, t_tree *next, int fd, int mode, char *filename)
 	return ((*t_tree)node);
 }
 
-t_tree  *get_cmd(t_comand *next)
+t_tree  *get_cmd(t_comamnd *next)
 {
 	t_cmd	*node;
 	
