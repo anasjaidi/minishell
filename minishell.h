@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/24 03:48:04 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/25 17:20:18 by anasjaidi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@
 # define OR 13
 # define PIPE 14
 # define CPAR 15 //
+// node_tree
+# define SUB 16 //
+# define CMD 17 //
+# define REDIR 18 //
+# define T_PIPE 19 //
+# define T_AND 20 //
+# define T_OR 21 //
 
 typedef struct s_token
 {

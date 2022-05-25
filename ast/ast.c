@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/25 02:33:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/25 17:36:45 by anasjaidi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,7 @@ t_tree	*get_block(t_token **head)
 			left = (t_tree*)ret;
 			right = get_pipe(head);
 			ret = get_wp(get_type(get_left(*head)), left, right);
-			continue ;
 		}
-		*head = get_right(*head);
 	}
 	return ((t_tree*)ret);
 }
@@ -79,7 +77,7 @@ t_tree	*get_pipe(t_token **head)
 	t_tree	*right;
 
 	left = get_command(head);
-	while (*head && (*head)->type != 12 && (*head)->type != 13)
+	while (*head)
 	{
 		if ((*head)->type == 14)
 		{
@@ -87,25 +85,28 @@ t_tree	*get_pipe(t_token **head)
 			right = get_command(head);
 			ret = get_wp(get_type(get_left(*head)), left, right);
 			left = (t_tree*)ret;
-			continue ;
 		}
-		*head = get_right(*head);
 	}
 	return ((t_tree*)ret);
 }
+
 t_tree	*get_command(t_token **head)
 {
 	t_sub	*ret;
 	t_tree	*next;
+	t_redir	*redir;	
 
 	if ((*head)->type == 9)
 	{
 		*head = get_right(*head);
 		ret->next = get_block(head);
+		next = (t_tree *)ret;
 	}
-	if (get_right(*head)->type >= 1 &&  get_right(*head)->type <= 4)
+	while (get_right(*head)->type >= 1 &&  get_right(*head)->type <= 4)
 	{
 		*head = get_right(*head);
-		get_rdr(ret , )
+		redir = get_redir(REDIR, next, get_fd(*head), get_mode(*head) ,get_filename(head));
+		next = (t_tree *)redir;
 	}
 }
+
