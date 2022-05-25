@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/24 21:20:02 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/25 02:33:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_tree	*get_block(t_token **head)
 	t_tree	*right;
 
 	left = get_pipe(head);
-	while (*head && (*head)->type != 15)
+	while (*head)
 	{
 		if ((*head)->type >= 12 && (*head)->type <= 13)
 		{
@@ -79,7 +79,7 @@ t_tree	*get_pipe(t_token **head)
 	t_tree	*right;
 
 	left = get_command(head);
-	while (*head && (*head)->type != 12 && (*head)->type != 13 && (*head)->type != 15)
+	while (*head && (*head)->type != 12 && (*head)->type != 13)
 	{
 		if ((*head)->type == 14)
 		{
@@ -87,6 +87,7 @@ t_tree	*get_pipe(t_token **head)
 			right = get_command(head);
 			ret = get_wp(get_type(get_left(*head)), left, right);
 			left = (t_tree*)ret;
+			continue ;
 		}
 		*head = get_right(*head);
 	}
@@ -102,5 +103,9 @@ t_tree	*get_command(t_token **head)
 		*head = get_right(*head);
 		ret->next = get_block(head);
 	}
-
+	if (get_right(*head)->type >= 1 &&  get_right(*head)->type <= 4)
+	{
+		*head = get_right(*head);
+		get_rdr(ret , )
+	}
 }
