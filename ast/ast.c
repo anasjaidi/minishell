@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/25 17:36:45 by anasjaidi        ###   ########.fr       */
+/*   Updated: 2022/05/30 01:43:51 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 // https://freecoursesite.com/the-web-developer-bootcamp-37/
 /*
-	<cmdline>	::= <block>
-		| <block> (";" | "&") <cmdline>
 
 	<block>		::= <pipeline> {("&&" | "||") <pipeline>}
 
@@ -34,10 +32,10 @@
 	<filename>	::= token WORD | token VAR | token GROUP
 */
 
-t_tree	*get_full(t_token **head)
+t_tree *get_full(t_token **head)
 {
-	t_wp	*ret;
-	t_token	*tmp;
+	t_tree *ret;
+	t_token *tmp;
 
 	tmp = *head;
 	while (tmp)
@@ -46,67 +44,200 @@ t_tree	*get_full(t_token **head)
 			;
 		else
 			tmp = get_right(tmp);
-		get_block(&tmp);
+		ret = get_block(&tmp);
 	}
+	return ((t_tree *)ret);
 }
 
-t_tree	*get_block(t_token **head)
+t_tree *get_block(t_token **head)
 {
-	t_wp	*ret;
-	t_tree	*left;
-	t_tree	*right;
+	t_tree *ret;
+	t_tree *left;
+	t_tree *right;
 
-	left = get_pipe(head);
+	ret = get_pipe(head);
 	while (*head)
 	{
 		if ((*head)->type >= 12 && (*head)->type <= 13)
 		{
 			*head = get_right(*head);
-			left = (t_tree*)ret;
-			right = get_pipe(head);
-			ret = get_wp(get_type(get_left(*head)), left, right);
+			left = (t_tree *)ret;
+			right = (t_tree *)get_pipe(head);
+			ret = (t_tree *)get_wp(get_type(get_left(*head)), left, right);
 		}
+		else
+			break;
 	}
-	return ((t_tree*)ret);
+	return ((t_tree *)ret);
 }
 
-t_tree	*get_pipe(t_token **head)
+t_tree *get_pipe(t_token **head)
 {
-	t_wp	*ret;
-	t_tree	*left;
-	t_tree	*right;
+	t_tree *ret;
+	t_tree *left;
+	t_tree *right;
 
-	left = get_command(head);
+	ret = get_command(head);
 	while (*head)
 	{
 		if ((*head)->type == 14)
 		{
 			*head = get_right(*head);
+			left = ret;
 			right = get_command(head);
 			ret = get_wp(get_type(get_left(*head)), left, right);
-			left = (t_tree*)ret;
 		}
+	}
+	return ((t_tree *)ret);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t_command	*new_nodecommand(char *str, int flag)
+{
+	t_command	*new;
+
+	new = (t_command *)malloc(sizeof(t_command));
+	if (!new)
+		return (NULL);
+	new->content = str;
+	new->type = flag;
+	new->next = NULL;
+	return (new);
+}
+
+void	append_in_cmdend(t_command **root, char *str)
+{
+	t_command	*tmp;
+	t_command	*p;
+
+	tmp = new_nodecommand(str, CMD);
+	if (!*root)
+		*root = tmp;
+	else
+	{
+		p = *root;
+		while (p->next)
+			p = p->next;
+		p->next = tmp;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+t_tree *get_cmdlist(t_token **head)
+{
+	t_cmd *ret;
+	t_command **root;
+
+	ret = (t_cmd*)get_cmdnode(NULL);
+	root = &ret->next;
+
+	while ((*head)->type == VAR || (*head)->type == WORD)
+	{
+		append_in_cmdend(root, (*head)->str);
+		*head = get_right(*head);
 	}
 	return ((t_tree*)ret);
 }
 
-t_tree	*get_command(t_token **head)
+t_tree *get_command(t_token **head)
 {
-	t_sub	*ret;
-	t_tree	*next;
-	t_redir	*redir;	
+	t_tree *ret;
+	t_tree *next;
+	t_redir *redir;
 
 	if ((*head)->type == 9)
 	{
 		*head = get_right(*head);
-		ret->next = get_block(head);
-		next = (t_tree *)ret;
-	}
-	while (get_right(*head)->type >= 1 &&  get_right(*head)->type <= 4)
-	{
+		ret = get_sub(get_block(head));
 		*head = get_right(*head);
-		redir = get_redir(REDIR, next, get_fd(*head), get_mode(*head) ,get_filename(head));
-		next = (t_tree *)redir;
 	}
+	else
+	{
+		ret = get_cmdlist(head);
+	}
+
+	// while ((*head)->type >= 1 &&  (*head)->type <= 4)
+	// {
+	// 	*head = get_right(*head);
+	// 	redir = get_redir(REDIR, next, get_fd(get_left(*head)), get_mode(get_left(*head)) ,get_filename(head));
+	// 	next = (t_tree *)redir;
+	// }
+	return (ret);
 }
 
+void display_tree(t_tree *tree, int in)
+{
+	if (!tree)
+		return;
+	for (size_t i = 0; i < in; i++)
+		printf("	");
+	if (tree->type == CMD)
+	{
+		display_tree((t_tree *)(((t_cmd *)tree)->next), in + 1);
+		printf("%s", types[tree->type - 16]);
+	}
+	if (tree->type >= 19)
+	{
+		display_tree((t_tree *)(((t_wp *)tree)->left), in + 1);
+		printf("%s", types[tree->type - 16]);
+		display_tree((t_tree *)(((t_wp *)tree)->right), in + 1);
+	}
+	if (tree->type == 18)
+	{
+		display_tree((t_tree *)(((t_redir *)tree)->next), in + 1);
+		printf("%s", types[tree->type - 16]);
+		display_tree((t_tree *)(((t_redir *)tree)->filename), in + 1);
+	}
+	if (tree->type == 16)
+	{
+		display_tree((t_tree *)(((t_sub *)tree)->next), in + 1);
+		printf("%s", types[tree->type - 16]);
+	}
+}

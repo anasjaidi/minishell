@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/25 17:20:18 by anasjaidi        ###   ########.fr       */
+/*   Updated: 2022/05/30 01:57:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define VAR 0 //
+# define VAR 0 // ...................
 # define DGREAT 1
 # define DLESS 2
 # define LESS 3
 # define GREAT 4
-# define WORD 5 //
+# define WORD 5 // .....................
 # define WSPACE 6 // 
 # define SQUOTE 7 //
 # define DQUOTE 8 //
@@ -41,6 +41,7 @@
 # define T_PIPE 19 //
 # define T_AND 20 //
 # define T_OR 21 //
+const char *types[] = {"subshell", "Command", "redirection", "pipe", "and", "or"};
 
 typedef struct s_token
 {
@@ -51,8 +52,8 @@ typedef struct s_token
 }	t_token;
 
 typedef struct	s_command {
-	char			*content;
 	int				type;
+	char			*content;
 	struct s_command *next;
 }	t_command;
 
@@ -105,9 +106,13 @@ int		check_flag(char *str, int q, t_token **root);
 int		take_wp(char *str, t_token **root);
 int		take_less_more(char *str, t_token **root);
 int		take_var(char *str, t_token **root);
+int 	get_type(t_token *head);
 void	unclosed_quote(t_token **root);
 int		check_char(char *str, t_token **root);
-void	token(char *str, t_token **root);
+t_tree *get_command(t_token **head);
+t_tree *get_block(t_token **head);
+t_tree	*token(char *str, t_token **root);
+t_tree *get_full(t_token **head);
 int		take_qvar(char *str, t_token **root);
 void	clr_lst(t_token **root, t_token *node);
 int		take_space(char *str, t_token **root);
@@ -120,9 +125,11 @@ int		check_begin(t_token *root);
 void	syntax_error(t_token **root);
 int		check_list(t_token *root);
 int		check_red(t_token *root);
+void display_tree(t_tree *tree, int in);
 int		check_cpar(t_token *root);
 int		check_wp(t_token *root);
 t_token	*get_right(t_token *root);
 t_token	*get_left(t_token *root);
 void	check_bal_par(t_token **root);
+t_tree  *get_cmdnode(t_cmd *next);
 #endif

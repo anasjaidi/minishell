@@ -1,0 +1,11 @@
+rm -rf minishell.o linkedlist.o parser/token.o parser/token2.o parser/token3.o parser/token_utils.o syntax/syntax.o syntax/syntax_utils.o ast/ast.o ast/methode_function.o ast/ast_utils.o
+rm -f minishell
+gcc  -c minishell.c -o minishell.o -I /include
+gcc  -c linkedlist.c -o linkedlist.o -I /include
+gcc  -c parser/token.c -o parser/token.o -I /include
+gcc  -c parser/token2.c -o parser/token2.o -I /include
+gcc  -c parser/token3.c -o parser/token3.o -I /include
+gcc  -c parser/token_utils.c -o parser/token_utils.o -I /include
+gcc  -c syntax/syntax.c -o syntax/syntax.o -I /include
+gcc  -c syntax/syntax_utils.c -o syntax/syntax_utils.o -I /include
+gcc  -c ast/ast.c -o ast/ast.o -I /include

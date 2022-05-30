@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/22 02:41:40 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/30 01:56:52 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	token(char *str, t_token **root)
+t_tree	*token(char *str, t_token **root)
 {
 	int		i;
 	t_tree	*head;
@@ -25,8 +25,9 @@ void	token(char *str, t_token **root)
 	if (*root)
 	{
 		check_syntax(root);
-		head = get_ast(root)
+		head = get_full(root);
 	}
+	return head;
 }
 
 int	check_char(char *str, t_token **root)

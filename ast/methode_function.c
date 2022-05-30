@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   methode_function.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 03:37:19 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/25 17:24:50 by anasjaidi        ###   ########.fr       */
+/*   Updated: 2022/05/30 01:03:19 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ t_tree  *get_redir(int type, t_tree *next, int fd, int mode, char *filename)
 	return ((t_tree*)node);
 }
 
-t_tree  *get_cmd(t_command *next)
+t_tree  *get_cmdnode(t_cmd *next)
 {
 	t_cmd	*node;
 	
 	node = malloc(sizeof(t_cmd));
 	node->type = CMD;
-	node->next = next;
+	node->next = NULL;
 	return ((t_tree*)node);
 }
 
@@ -65,4 +65,15 @@ int get_type(t_token *head)
 		return (T_AND);
 	if (head->type == OR)
 		return (T_OR);
+}
+
+t_command  *get_nodelist(char *content)
+{
+	t_command	*node;
+	
+	node = malloc(sizeof(t_command));
+	node->type = CMD;
+	node->next = NULL;
+	node->content = content;
+	return (node);
 }
