@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 01:57:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/30 18:50:08 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define T_PIPE 19 //
 # define T_AND 20 //
 # define T_OR 21 //
-const char *types[] = {"subshell", "Command", "redirection", "pipe", "and", "or"};
+extern const char *types[];
 
 typedef struct s_token
 {
@@ -110,8 +110,10 @@ int 	get_type(t_token *head);
 void	unclosed_quote(t_token **root);
 int		check_char(char *str, t_token **root);
 t_tree *get_command(t_token **head);
+void	display_nodetree(t_command *root);
 t_tree *get_block(t_token **head);
 t_tree	*token(char *str, t_token **root);
+t_tree *get_cmdlist(t_token **head);
 t_tree *get_full(t_token **head);
 int		take_qvar(char *str, t_token **root);
 void	clr_lst(t_token **root, t_token *node);

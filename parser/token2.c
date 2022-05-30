@@ -6,11 +6,11 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:51:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 01:56:26 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:12:31 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	take_dquote(char *str, t_token **root)
 {

@@ -6,11 +6,11 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 03:37:19 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 01:03:19 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/30 16:12:21 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../minishell.h"
+#include "minishell.h"
 
 t_tree  *get_wp(int type, t_tree *left, t_tree *right)
 {
@@ -65,6 +65,7 @@ int get_type(t_token *head)
 		return (T_AND);
 	if (head->type == OR)
 		return (T_OR);
+	return (-1);
 }
 
 t_command  *get_nodelist(char *content)

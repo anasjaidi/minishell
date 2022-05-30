@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   linkedlist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 21:53:44 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/30 20:01:01 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,23 @@ void	display_node(t_token *root)
 		while (temp)
 		{
 			printf("[%d]=>[%s]\n", temp->type, temp->str);
+			temp = temp->next;
+		}
+	}
+}
+void	display_nodetree(t_command *root)
+{
+	t_command	*temp;
+
+	temp = root;
+	if (!root)
+		printf("List is empty");
+	else
+	{
+		temp = root;
+		while (temp)
+		{
+			printf("[%s] ", temp->content);
 			temp = temp->next;
 		}
 	}

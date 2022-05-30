@@ -6,11 +6,11 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 01:56:52 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/30 17:23:00 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 t_tree	*token(char *str, t_token **root)
 {
