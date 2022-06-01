@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 20:10:01 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/05/31 00:39:51 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,24 @@ t_tree *get_cmdlist(t_token **head)
 	return ((t_tree*)ret);
 }
 
+t_tree	*get_rdr(t_token **head)
+{
+	t_tree	*next;
+	t_tree	*ret;
+
+	next = get_cmdlist(head);
+	while (*head && (*head)->type >= 1 && (*head)->type <= 4)
+	{
+		*head = get_right(*head);
+		ret = get_redir(REDIR, next, 0,0, (*head)->str);
+		next = ret;
+		*head = get_right(*head);
+	}
+	// if (ret == next)
+	// 	return (ret);
+	return (ret);
+}
+
 t_tree *get_command(t_token **head)
 {
 	t_tree *ret;
@@ -215,7 +233,7 @@ t_tree *get_command(t_token **head)
 	}
 	else
 	{
-		ret = get_cmdlist(head);
+		ret = get_rdr(head);
 	}
 
 	// while ((*head)->type >= 1 &&  (*head)->type <= 4)
@@ -248,9 +266,8 @@ void display_tree(t_tree *tree, int in)
 	}
 	if (tree->type == 18)
 	{
-		printf("%s \n", types[tree->type - 16]);
+		printf("%s %s\n", types[tree->type - 16], ((t_redir*)tree)->filename);
 		display_tree((t_tree *)(((t_redir *)tree)->next), in + 1);
-		display_tree((t_tree *)(((t_redir *)tree)->filename), in + 1);
 	}
 	if (tree->type == 16)
 	{
