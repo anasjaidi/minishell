@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 18:50:08 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/21 15:23:39 by anasjaidi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define T_AND 20 //
 # define T_OR 21 //
 extern const char *types[];
+#define null NULL
 
 typedef struct s_token
 {
@@ -108,6 +109,7 @@ int		take_less_more(char *str, t_token **root);
 int		take_var(char *str, t_token **root);
 int 	get_type(t_token *head);
 void	unclosed_quote(t_token **root);
+void	delete_quotes(t_token **root);
 int		check_char(char *str, t_token **root);
 t_tree *get_command(t_token **head);
 void	display_nodetree(t_command *root);
