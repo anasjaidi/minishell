@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/31 00:39:51 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/22 23:19:35 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,12 +139,12 @@ t_command	*new_nodecommand(char *str, int flag)
 	return (new);
 }
 
-void	append_in_cmdend(t_command **root, char *str)
+void	append_in_cmdend(t_command **root, char *str, int type)
 {
 	t_command	*tmp;
 	t_command	*p;
 
-	tmp = new_nodecommand(str, CMD);
+	tmp = new_nodecommand(str, type);
 	if (!*root)
 		*root = tmp;
 	else
@@ -195,28 +195,41 @@ t_tree *get_cmdlist(t_token **head)
 	ret = (t_cmd*)get_cmdnode(NULL);
 	while (*head && ((*head)->type == VAR || (*head)->type == WORD))
 	{
-		append_in_cmdend(&ret->next, (*head)->str);
+		append_in_cmdend(&ret->next, (*head)->str, (*head)->type);
 		*head = get_right(*head);
 	}
 	return ((t_tree*)ret);
 }
 
-t_tree	*get_rdr(t_token **head)
+t_tree	*get_rdr(t_token **head , t_tree *n)
 {
 	t_tree	*next;
-	t_tree	*ret;
-
-	next = get_cmdlist(head);
+	t_command	**root;
+	t_cmd	*next2;
+	t_tree	*ret = NULL;
+	if (!n)
+	{
+		next = get_cmdlist(head);
+		next2 = (t_cmd*)next;	
+	}
+	else
+		next = n;
 	while (*head && (*head)->type >= 1 && (*head)->type <= 4)
 	{
 		*head = get_right(*head);
 		ret = get_redir(REDIR, next, 0,0, (*head)->str);
 		next = ret;
 		*head = get_right(*head);
+		while (*head && ((*head)->type == VAR || (*head)->type == WORD))
+		{
+			append_in_cmdend(&next2->next, (*head)->str, (*head)->type);
+			*head = get_right(*head);
+		}
 	}
-	// if (ret == next)
-	// 	return (ret);
-	return (ret);
+	if (ret)
+		return (ret);
+	else
+		return (next);
 }
 
 t_tree *get_command(t_token **head)
@@ -230,18 +243,12 @@ t_tree *get_command(t_token **head)
 		*head = get_right(*head);
 		ret = get_sub(get_block(head));
 		*head = get_right(*head);
+		ret = get_rdr(head, ret);
 	}
 	else
 	{
-		ret = get_rdr(head);
+		ret = get_rdr(head, null);
 	}
-
-	// while ((*head)->type >= 1 &&  (*head)->type <= 4)
-	// {
-	// 	*head = get_right(*head);
-	// 	redir = get_redir(REDIR, next, get_fd(get_left(*head)), get_mode(get_left(*head)) ,get_filename(head));
-	// 	next = (t_tree *)redir;
-	// }
 	return (ret);
 }
 

@@ -1,0 +1,27 @@
+{
+	"files.associations": {
+		"*.excalidraw": "json",
+		"*.excalidrawlib": "json",
+		"sstream": "c",
+		"__bit_reference": "c",
+		"__debug": "c",
+		"__functional_base": "c",
+		"__hash_table": "c",
+		"__mutex_base": "c",
+		"__tuple": "c",
+		"atomic": "c",
+		"memory_resource": "c",
+		"type_traits": "c",
+		"functional": "c",
+		"istream": "c",
+		"locale": "c",
+		"memory": "c",
+		"mutex": "c",
+		"new": "c",
+		"ostream": "c",
+		"unordered_map": "c",
+		"utility": "c",
+		"vector": "c",
+		"ios": "c"
+	}
+}
