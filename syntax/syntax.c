@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 20:37:29 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:55:43 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	check_syntax(t_token **root)
 			return ((void)(syntax_error(root)));
 		temp = get_right(temp);
 	}
-	check_bal_par(root);
+	//check_bal_par(root);
 }
 
 void	check_bal_par(t_token **root)
@@ -38,6 +38,8 @@ void	check_bal_par(t_token **root)
 	int		l;
 	t_token	*temp;
 
+	if (!*root)
+		return ;
 	l = 0;
 	temp = *root;
 	while (temp)
@@ -64,7 +66,7 @@ int	check_begin(t_token *root)
 
 void	syntax_error(t_token **root)
 {
-	*root = NULL;
+	//*root = NULL;
 	printf("syntax Eroor\n");
 }
 
