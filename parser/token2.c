@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:51:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/05/30 16:12:31 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:27:38 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	*add_item(char *start, char *end, int flag, t_token **root)
 	int		i;
 
 	i = -1;
-	str = (char *)malloc(calc_size(start, end));
+	str = (char *)ft_malloc(&g.adrs, calc_size(start, end));
 	if (!str)
 		return (NULL);
 	while (start != end)

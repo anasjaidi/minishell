@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/21 15:23:39 by anasjaidi        ###   ########.fr       */
+/*   Updated: 2022/06/23 21:26:56 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <readline/readline.h>
 # include <stdlib.h>
 # include <unistd.h>
+#include <fcntl.h>
+#include <string.h>
 
 # define VAR 0 // ...................
 # define DGREAT 1
@@ -43,6 +45,8 @@
 # define T_OR 21 //
 extern const char *types[];
 #define null NULL
+
+
 
 typedef struct s_token
 {
@@ -90,8 +94,24 @@ typedef	struct	s_redir
 	struct s_tree	*next;	
 }	t_redir;
 
+typedef struct s_collector
+{
+	void				*adr;
+	struct s_collector	*next;
+}	t_collector;
+typedef	struct s_global
+{
+	t_collector	*adrs;
+}	t_global;
+t_global	g;
+
+t_collector	*new_node_adr(void *adr);
+t_collector	**append_adr(t_collector **root, void *adr);
+void		*ft_malloc(t_collector **root, size_t size);
+void		ft_collect(t_collector **root, t_collector *node);
+
 t_tree  *get_wp(int type, t_tree *left, t_tree *right);
-t_tree  *get_redir(int type, t_tree *next, int fd, int mode, char *filename);
+t_tree  *get_redir(int type, t_tree *next, int fd, int mode, char *filename, int redtype);
 int		calc_size(char *start, char *end);
 int		take_par(char *str, t_token **root);
 t_tree  *get_cmd(t_command *next);
@@ -136,4 +156,10 @@ t_token	*get_right(t_token *root);
 t_token	*get_left(t_token *root);
 void	check_bal_par(t_token **root);
 t_tree  *get_cmdnode(t_cmd *next);
+t_command	*new_nodecommand(char *str, int flag);
+void	append_in_cmdend(t_command **root, char *str, int type);
+void display_tree(t_tree *tree, int in);
+int	ft_strlen(char *s);
+int	ft_memcmp(void *s1,void *s2, int n);
+int herdoc(char *del);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anasjaidi <anasjaidi@student.42.fr>        +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/21 15:30:27 by anasjaidi        ###   ########.fr       */
+/*   Updated: 2022/06/23 20:35:54 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ t_token	*link_nodes(t_token **root, t_token *deleted)
 	{
 		*root = deleted->next;
 		(*root)->prev = null;
-		return (free(deleted), *root);
+		return (*root);
 	}
 	else if (!deleted->next)
 	{
 		tmp = deleted->prev;
 		deleted->prev->next = null;
-		return (free(deleted), tmp);
+		return (tmp);
 	}
 	tmp = deleted->prev;
 	deleted->next->prev = tmp;
 	tmp->next = deleted->next;
-	return (free(deleted), tmp);
+	return (tmp);
 }
 
 void	delete_quotes(t_token **root)

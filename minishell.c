@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/22 21:58:11 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/23 21:46:10 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ int	main(void)
 	t_tree	*head;
 
 	root = NULL;
+	g.adrs = null;
 	while (1)
 	{
 		str = readline("Minishell@robin:");
 		if (str)
 			head = token(str, &root);
+		free(str);
 		display_tree(head, 0);
-		clr_lst(&root, root);
+		ft_collect(&g.adrs, g.adrs);
+		g.adrs = null;
 		root = NULL;
+		printf("%d\n", getpid());
 	}
 }
