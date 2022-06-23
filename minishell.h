@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 21:26:56 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/23 23:38:02 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,23 @@ typedef struct s_collector
 	void				*adr;
 	struct s_collector	*next;
 }	t_collector;
+
+typedef	struct s_env
+{
+	char	*key;
+	char	*value;
+	struct	s_env	*next;
+}	t_env;
+
 typedef	struct s_global
 {
 	t_collector	*adrs;
+	t_env		*env;
 }	t_global;
 t_global	g;
 
 t_collector	*new_node_adr(void *adr);
+void	display_env(t_env *root);
 t_collector	**append_adr(t_collector **root, void *adr);
 void		*ft_malloc(t_collector **root, size_t size);
 void		ft_collect(t_collector **root, t_collector *node);
@@ -162,4 +172,6 @@ void display_tree(t_tree *tree, int in);
 int	ft_strlen(char *s);
 int	ft_memcmp(void *s1,void *s2, int n);
 int herdoc(char *del);
+char	**ft_split(char const *s, char c);
+void	get_env(char **env);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 21:55:52 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/23 23:41:35 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 const char *types[] = {"subshell", "Command", "redirection", "pipe", "and", "or"};
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	char	*str;
 	t_token	*root;
@@ -22,6 +22,8 @@ int	main(void)
 
 	root = NULL;
 	g.adrs = null;
+	get_env(env);
+	display_env(g.env);
 	while (1)
 	{
 		str = readline("Minishell@robin:");
