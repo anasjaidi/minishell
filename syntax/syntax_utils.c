@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/24 02:33:19 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:20:58 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_red(t_token *root)
 	t = get_right(root);
 	if (!t)
 		return (0);
-	if ((!(t->type >= 5 && t->type <= 8) && (t->type != 0) && (t->type != 15) \
+	if ((!(t->type >= 5 && t->type <= 8) && (t->type != 0)\
 		&& (t->type != 10) && (t->type != 11)))
 		return (0);
 	return (1);

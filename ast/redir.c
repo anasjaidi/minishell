@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:38:05 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:48:57 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:11:25 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	herdoc(char *del)
 	return (fd[0]);
 }
 
-t_tree	*get_redir(int type, t_tree *next, char *filename, int redtype)
+t_tree	*get_redir(t_tree *next, char *filename, int redtype)
 {
 	t_redir	*node;
 
@@ -71,7 +71,7 @@ t_tree	*get_rdr(t_token **head, t_tree *n)
 	while (*head && (*head)->type >= 1 && (*head)->type <= 4)
 	{
 		*head = get_right(*head);
-		ret = get_redir(REDIR, next, (*head)->str, get_left(*head)->type);
+		ret = get_redir(next, (*head)->str, get_left(*head)->type);
 		next = ret;
 		*head = get_right(*head);
 		while (*head && ((*head)->type == VAR || (*head)->type == WORD))

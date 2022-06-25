@@ -6,13 +6,13 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 17:33:20 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:09:36 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_syntax(t_token **root)
+int	check_syntax(t_token **root)
 {
 	t_token	*temp;
 
@@ -21,25 +21,25 @@ void	check_syntax(t_token **root)
 	else if ((*root)->type != 6)
 		temp = *root;
 	else
-		return ;
+		return 0;
 	if (!check_begin(temp))
-		return ((void)(syntax_error(root)));
+		return ((void)(syntax_error(root)), 0);
 	while (temp)
 	{
 		if (!check_list(temp))
-			return ((void)(syntax_error(root)));
+			return ((void)(syntax_error(root)), 0);
 		temp = get_right(temp);
 	}
-	check_bal_par(root);
+	return (check_bal_par(root));
 }
 
-void	check_bal_par(t_token **root)
+int	check_bal_par(t_token **root)
 {
 	int		l;
 	t_token	*temp;
 
 	if (!*root)
-		return ;
+		return 0;
 	l = 0;
 	temp = *root;
 	while (temp)
@@ -49,16 +49,17 @@ void	check_bal_par(t_token **root)
 		else if (temp->type == 15)
 			l--;
 		if (l < 0)
-			return ((void)(syntax_error(root)));
+			return ((void)(syntax_error(root)), 0);
 		temp = temp->next;
 	}
 	if (l)
-		syntax_error(root);
+		return (syntax_error(root), 0);
+	return (1);
 }
 
 int	check_begin(t_token *root)
 {
-	if (!(root->type <= 15 && root->type >= 12))
+	if (root->type >= VAR && root->type <= OPAR)
 		return (1);
 	else
 		return (0);

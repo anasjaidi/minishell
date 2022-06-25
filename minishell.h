@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:30:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 19:10:40 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,8 +120,7 @@ void		*ft_malloc(t_collector **root, size_t size);
 void		ft_collect(t_collector **root, t_collector *node);
 
 t_tree		*get_wp(int type, t_tree *left, t_tree *right);
-t_tree		*get_redir(int type, t_tree *next, int fd,\
-	int mode, char *filename, int redtype);
+t_tree		*get_redir(t_tree *next, char *filename, int redtype);
 int			calc_size(char *start, char *end);
 int			take_par(char *str, t_token **root);
 t_tree		*get_cmd(t_command *next);
@@ -154,7 +153,7 @@ int			get_last(char *str);
 t_tree		*get_pipe(t_token **head);
 int			invalid_token(t_token **root, char *str);
 int			check_closed_dq(t_token **root, char	*str, int i, int last);
-void		check_syntax(t_token **root);
+int			check_syntax(t_token **root);
 int			check_begin(t_token *root);
 void		syntax_error(t_token **root);
 int			check_list(t_token *root);
@@ -164,7 +163,7 @@ int			check_cpar(t_token *root);
 int			check_wp(t_token *root);
 t_token		*get_right(t_token *root);
 t_token		*get_left(t_token *root);
-void		check_bal_par(t_token **root);
+int			check_bal_par(t_token **root);
 t_tree		*get_cmdnode(t_cmd *next);
 t_command	*new_nodecommand(char *str, int flag);
 void		append_in_cmdend(t_command **root, char *str, int type);

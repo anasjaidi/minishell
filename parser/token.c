@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 17:36:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:21:43 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_tree	*token(char *str, t_token **root)
 	}
 	if (*root)
 	{
-		check_syntax(root);
+		if (!check_syntax(root))
+			return (NULL);
 		delete_quotes(root);
 		head = get_full(root);
 	}

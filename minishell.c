@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:29:51 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 21:22:35 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	main(int ac, char **av, char **env)
 		if (str)
 			head = token(str, &root);
 		free(str);
-		display_tree(head, 0);
+		if (head)
+			display_tree(head, 0);
 		ft_collect(&g.adrs, g.adrs);
 		g.adrs = NULL;
 		root = NULL;
