@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:26:11 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 23:38:43 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,12 @@ void	display_env(t_env *root)
 
 void	get_env(char **env)
 {
-	char **spl;
+	char	**spl;
+
 	while (*env)
 	{
 		spl = ft_split(*env, '=');
 		append_in_end_env(&g.env, spl[0], spl[1]);
 		env++;
 	}
-	
 }

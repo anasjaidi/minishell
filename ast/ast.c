@@ -6,51 +6,16 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/22 23:38:29 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:32:46 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-// https://freecoursesite.com/the-web-developer-bootcamp-37/
-/*
-
-	<block>		::= <pipeline> {("&&" | "||") <pipeline>}
-
-	<pipeline>	::= <command> {"|" <command>}
-
-	<command>	::= <cmdlist>
-		| "(" <cmdline> ")" <redir>	(* subshell *)
-
-	<cmdlist>	::= <redir>+			(* at least one redirect - without WORDs *)
-		| <redir> {<arg> <redir>}+	(* at least one WORD - zero or more <redir> in any place *)
-
-	<redir>		::= {("<" | "<<" | ">" | ">>") <filename>}	(* a delimiter in case of heredoc *)
-
-	<arg>		::= token WORD | token VAR | token GROUP
-
-	<filename>	::= token WORD | token VAR | token GROUP
-*/
-
-// t_tree *get_cmdlist(t_token **head)
-// {
-// 	t_cmd *ret;
-// 	//t_command **root;
-
-// 	ret = (t_cmd*)get_cmdnode(NULL);
-// 	//root = &ret->next;
-
-// 	while ((*head)->type == VAR || (*head)->type == WORD)
-// 	{
-// 		append_in_cmdend(&ret->next, (*head)->str);
-// 		*head = get_right(*head);
-// 	}
-// 	return ((t_tree*)ret);
-// }
-t_tree *get_full(t_token **head)
+t_tree	*get_full(t_token **head)
 {
-	t_tree *ret;
-	t_token *tmp;
+	t_tree	*ret;
+	t_token	*tmp;
 
 	tmp = *head;
 	if (tmp == *head && tmp->type != 6)
@@ -61,7 +26,7 @@ t_tree *get_full(t_token **head)
 	return ((t_tree *)ret);
 }
 
-t_tree *get_block(t_token **head)
+t_tree	*get_block(t_token **head)
 {
 	t_tree	*ret;
 	t_token	*tmp;
@@ -80,17 +45,17 @@ t_tree *get_block(t_token **head)
 			ret = (t_tree *)get_wp(get_type(tmp), left, right);
 		}
 		else
-			break;
+			break ;
 	}
 	return ((t_tree *)ret);
 }
 
-t_tree *get_pipe(t_token **head)
+t_tree	*get_pipe(t_token **head)
 {
-	t_tree *ret;
+	t_tree	*ret;
 	t_token	*tmp;
-	t_tree *left;
-	t_tree *right;
+	t_tree	*left;
+	t_tree	*right;
 
 	ret = get_command(head);
 	while (*head)
@@ -104,60 +69,29 @@ t_tree *get_pipe(t_token **head)
 			ret = get_wp(get_type(tmp), left, right);
 		}
 		else
-			break;
+			break ;
 	}
 	return ((t_tree *)ret);
 }
 
-t_tree *get_cmdlist(t_token **head)
+t_tree	*get_cmdlist(t_token **head)
 {
-	t_cmd *ret;
+	t_cmd	*ret;
 
-	ret = (t_cmd*)get_cmdnode(NULL);
+	ret = (t_cmd *)get_cmdnode(NULL);
 	while (*head && ((*head)->type == VAR || (*head)->type == WORD))
 	{
 		append_in_cmdend(&ret->next, (*head)->str, (*head)->type);
 		*head = get_right(*head);
 	}
-	return ((t_tree*)ret);
+	return ((t_tree *)ret);
 }
 
-t_tree	*get_rdr(t_token **head , t_tree *n)
+t_tree	*get_command(t_token **head)
 {
+	t_tree	*ret;
 	t_tree	*next;
-	t_command	**root;
-	t_cmd	*next2;
-	t_tree	*ret = NULL;
-	if (!n)
-	{
-		next = get_cmdlist(head);
-		next2 = (t_cmd*)next;	
-	}
-	else
-		next = n;
-	while (*head && (*head)->type >= 1 && (*head)->type <= 4)
-	{
-		*head = get_right(*head);
-		ret = get_redir(REDIR, next, 0,0, (*head)->str, get_left(*head)->type);
-		next = ret;
-		*head = get_right(*head);
-		while (*head && ((*head)->type == VAR || (*head)->type == WORD))
-		{
-			append_in_cmdend(&next2->next, (*head)->str, (*head)->type);
-			*head = get_right(*head);
-		}
-	}
-	if (ret)
-		return (ret);
-	else
-		return (next);
-}
-
-t_tree *get_command(t_token **head)
-{
-	t_tree *ret;
-	t_tree *next;
-	t_redir *redir;
+	t_redir	*redir;
 
 	if ((*head)->type == 9)
 	{
@@ -168,8 +102,7 @@ t_tree *get_command(t_token **head)
 	}
 	else
 	{
-		ret = get_rdr(head, null);
+		ret = get_rdr(head, NULL);
 	}
 	return (ret);
 }
-

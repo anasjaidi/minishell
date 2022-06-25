@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 20:38:52 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	display_node(t_token *root)
 		}
 	}
 }
+
 void	display_nodetree(t_command *root)
 {
 	t_command	*temp;

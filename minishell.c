@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 23:41:35 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:29:51 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,17 @@ int	main(int ac, char **av, char **env)
 	t_tree	*head;
 
 	root = NULL;
-	g.adrs = null;
+	g.adrs = NULL;
 	get_env(env);
-	display_env(g.env);
 	while (1)
 	{
 		str = readline("Minishell@robin:");
 		if (str)
 			head = token(str, &root);
 		free(str);
-		//display_tree(head, 0);
+		display_tree(head, 0);
 		ft_collect(&g.adrs, g.adrs);
-		g.adrs = null;
+		g.adrs = NULL;
 		root = NULL;
-		printf("%d\n", getpid());
 	}
 }

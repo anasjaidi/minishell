@@ -6,12 +6,11 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:50:27 by anasjaidi         #+#    #+#             */
-/*   Updated: 2022/06/23 20:41:41 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 t_collector	*new_node_adr(void *adr)
 {

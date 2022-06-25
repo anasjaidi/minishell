@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/23 20:35:54 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:36:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,41 +28,7 @@ t_tree	*token(char *str, t_token **root)
 		delete_quotes(root);
 		head = get_full(root);
 	}
-	return head;
-}
-
-t_token	*link_nodes(t_token **root, t_token *deleted)
-{
-	t_token	*tmp;
-	
-	if (!deleted->prev)
-	{
-		*root = deleted->next;
-		(*root)->prev = null;
-		return (*root);
-	}
-	else if (!deleted->next)
-	{
-		tmp = deleted->prev;
-		deleted->prev->next = null;
-		return (tmp);
-	}
-	tmp = deleted->prev;
-	deleted->next->prev = tmp;
-	tmp->next = deleted->next;
-	return (tmp);
-}
-
-void	delete_quotes(t_token **root)
-{
-	t_token	*tmp = *root;
-
-	while (tmp)
-	{
-		if (tmp->type == 7 || tmp->type == 8)
-			tmp = link_nodes(root, tmp);
-		tmp = tmp->next;
-	}
+	return (head);
 }
 
 int	check_char(char *str, t_token **root)
