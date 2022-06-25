@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 22:19:32 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:36:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void	token(char *str, t_token **root)
+t_tree	*token(char *str, t_token **root)
 {
-	int	i;
+	int		i;
+	t_tree	*head;
 
 	i = 0;
 	while (str[i])
@@ -22,7 +23,12 @@ void	token(char *str, t_token **root)
 		i += check_char(str + i, root);
 	}
 	if (*root)
+	{
 		check_syntax(root);
+		delete_quotes(root);
+		head = get_full(root);
+	}
+	return (head);
 }
 
 int	check_char(char *str, t_token **root)

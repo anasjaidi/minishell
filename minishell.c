@@ -3,28 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/24 05:48:57 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:29:51 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(void)
+const char *types[] = {"subshell", "Command", "redirection", "pipe", "and", "or"};
+
+int	main(int ac, char **av, char **env)
 {
 	char	*str;
 	t_token	*root;
+	t_tree	*head;
 
 	root = NULL;
+	g.adrs = NULL;
+	get_env(env);
 	while (1)
 	{
 		str = readline("Minishell@robin:");
 		if (str)
-			token(str, &root);
-		
-		clr_lst(&root, root);
+			head = token(str, &root);
+		free(str);
+		display_tree(head, 0);
+		ft_collect(&g.adrs, g.adrs);
+		g.adrs = NULL;
 		root = NULL;
 	}
 }

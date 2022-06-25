@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:54:31 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/21 17:02:32 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/22 23:40:44 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	take_less_more(char *str, t_token **root)
 {

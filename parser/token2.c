@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajaidi < ajaidi@student.1337.ma>           +#+  +:+       +#+        */
+/*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:51:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/04/23 22:20:08 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	take_dquote(char *str, t_token **root)
 {
@@ -80,7 +80,7 @@ void	*add_item(char *start, char *end, int flag, t_token **root)
 	int		i;
 
 	i = -1;
-	str = (char *)malloc(calc_size(start, end));
+	str = (char *)ft_malloc(&g.adrs, calc_size(start, end));
 	if (!str)
 		return (NULL);
 	while (start != end)

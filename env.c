@@ -1,37 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linkedlist.c                                       :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
+/*   Created: 2022/06/23 23:26:11 by ajaidi            #+#    #+#             */
 /*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*new_node(char *str, int flag)
+t_env	*new_node_env(char *key, char *value)
 {
-	t_token	*new;
+	t_env	*new;
 
-	new = (t_token *)ft_malloc(&g.adrs, sizeof(t_token));
+	new = (t_env *)ft_malloc(&g.adrs, sizeof(t_env));
 	if (!new)
 		return (NULL);
-	new->str = str;
-	new->type = flag;
-	new->prev = NULL;
+	new->value = value;
+	new->key = key;
 	new->next = NULL;
 	return (new);
 }
 
-void	append_in_end(t_token **root, char *str, int flag)
+void	append_in_end_env(t_env **root, char *key, char *value)
 {
-	t_token	*tmp;
-	t_token	*p;
+	t_env	*tmp;
+	t_env	*p;
 
-	tmp = new_node(str, flag);
+	tmp = new_node_env(key, value);
 	if (!*root)
 		*root = tmp;
 	else
@@ -40,31 +39,12 @@ void	append_in_end(t_token **root, char *str, int flag)
 		while (p->next)
 			p = p->next;
 		p->next = tmp;
-		tmp->prev = p;
 	}
 }
 
-void	display_node(t_token *root)
+void	display_env(t_env *root)
 {
-	t_token	*temp;
-
-	temp = root;
-	if (!root)
-		printf("List is empty\n");
-	else
-	{
-		temp = root;
-		while (temp)
-		{
-			printf("[%d]=>[%s]\n", temp->type, temp->str);
-			temp = temp->next;
-		}
-	}
-}
-
-void	display_nodetree(t_command *root)
-{
-	t_command	*temp;
+	t_env	*temp;
 
 	temp = root;
 	if (!root)
@@ -74,16 +54,20 @@ void	display_nodetree(t_command *root)
 		temp = root;
 		while (temp)
 		{
-			printf("[%s] ", temp->content);
+			printf("[%s] = %s\n", temp->key, temp->value);
 			temp = temp->next;
 		}
 	}
 }
 
-void	clr_lst(t_token **root, t_token *node)
+void	get_env(char **env)
 {
-	if (node == NULL)
-		return ;
-	clr_lst(root, node->next);
-	free(node);
+	char	**spl;
+
+	while (*env)
+	{
+		spl = ft_split(*env, '=');
+		append_in_end_env(&g.env, spl[0], spl[1]);
+		env++;
+	}
 }
