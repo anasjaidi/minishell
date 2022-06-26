@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 19:10:40 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/26 16:24:49 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,5 +173,5 @@ int			ft_memcmp(void *s1,void *s2, int n);
 int			herdoc(char *del);
 char		**ft_split(char const *s, char c);
 void		get_env(char **env);
-
+char	*get_env_value(char *str);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:05:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:40:45 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/26 16:24:44 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,18 @@ int	ft_memcmp(void *s1, void *s2, int n)
 	while (*(char *)(s1 + i) == *(char *)(s2 + i) && i < n - 1)
 		i++;
 	return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
+}
+
+char	*get_env_value(char *str)
+{
+	t_env	*tmp;
+
+	tmp = g.env;
+	while (tmp)
+	{
+		if (!ft_memcmp(str, tmp->key, ft_strlen(str)))
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }
