@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:37:13 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/30 18:11:02 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/02 22:40:50 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,13 @@ int exit_parse(char *str)
 	return (atoi(str));
 }
 
-int	ex_ps(t_command *cmd)
+int	ft_exit(char **argv)
 {
-	
-	if (cmd->type == VAR)
-		return (exit_parse(get_env_value(cmd->content + 1)));
-	else if (cmd->type == TILD)
-		return (255);
-}
-
-int	ft_exit(t_command *cmd)
-{
-	if (!cmd->next)
+	if (!agrv[1])
 		exit(g.status);
-	if (cmd->next->next)
+	if (argv[2])
 		return (ft_putstr_fd("exit: too many arguments\n", 1), g.status = -7, 0);
-	else if (cmd->type == WILD)
-		if (get_wild_value()[1])
-			return (ft_putstr_fd("exit: too many arguments\n", 1), g.status = -7, 0);
-	else if (cmd->type == WILD)
-		exit(exit_parse(get_wild_value()[0]));
-	exit(ex_ps(cmd->next));
+	exit(exit_parse(argv[1]));
 }
 
 int	ft_pwd(int fd)

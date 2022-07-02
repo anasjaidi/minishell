@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/30 17:00:44 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/02 22:13:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ extern const char *types[];
 # include <unistd.h>
 # include <fcntl.h>
 # include <string.h>
+# include <dirent.h>
 
 # define VAR 0
 # define DGREAT 1

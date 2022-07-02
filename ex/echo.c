@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:12:56 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/02 16:33:32 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/02 22:41:20 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	new_line(char *str)
 	return (1);
 }
 
-int	check_echo_flag(char **argv)
+int	ft_echo(char **argv)
 {
 	int i = 0;
 	int	flag = 1;
@@ -43,11 +43,4 @@ int	check_echo_flag(char **argv)
 	}
 	if (flag)
 		ft_putstr_fd(" ", 1);
-}
-
-void ft_echo(char **argv)
-{
-	int n;
-
-	n = check_echo_flag(argv);
 }
