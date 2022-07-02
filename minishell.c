@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/26 16:28:46 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/26 17:03:02 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int ac, char **av, char **env)
 	root = NULL;
 	g.adrs = NULL;
 	get_env(env);
+	display_env(g.env);
 	while (1)
 	{
 		str = readline("Minishell@robin:");

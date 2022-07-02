@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/26 16:24:49 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/06/30 17:00:44 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,10 +108,11 @@ typedef	struct s_global
 {
 	t_collector	*adrs;
 	t_env		*env;
+	int			status;
 }	t_global;
 
 t_global	g;
-
+void	ft_putstr_fd(char *str, int fd);
 t_collector	*new_node_adr(void *adr);
 t_tree		*get_rdr(t_token **head , t_tree *n);
 void		display_env(t_env *root);
