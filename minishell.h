@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/02 22:13:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/02 23:28:36 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,4 +176,6 @@ int			herdoc(char *del);
 char		**ft_split(char const *s, char c);
 void		get_env(char **env);
 char	*get_env_value(char *str);
+t_env	*get_env_node(char *str);
+void	append_in_end_env(t_env **root, char *key, char *value)
 #endif

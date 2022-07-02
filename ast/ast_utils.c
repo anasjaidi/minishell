@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:05:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/26 16:24:44 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/02 23:26:22 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,20 @@ char	*get_env_value(char *str)
 	{
 		if (!ft_memcmp(str, tmp->key, ft_strlen(str)))
 			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+char	*get_env_node(char *str)
+{
+	t_env	*tmp;
+
+	tmp = g.env;
+	while (tmp)
+	{
+		if (!ft_memcmp(str, tmp->key, ft_strlen(str)))
+			return (tmp);
 		tmp = tmp->next;
 	}
 	return (NULL);
