@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:38:05 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 19:11:25 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:38:57 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	herdoc(char *del)
 	while (1)
 	{
 		line = readline("herdoc >");
-		if (!ft_memcmp(del, line, ft_strlen(del)))
+		if (!ft_strcmp(del, line))
 			break ;
 		write(fd[1], line, ft_strlen(line));
 		write(fd[1], "\n", 1);
@@ -34,7 +34,7 @@ t_tree	*get_redir(t_tree *next, char *filename, int redtype)
 {
 	t_redir	*node;
 
-	node = ft_malloc(&g.adrs, sizeof(t_redir));
+	node = ft_malloc(&g.adrs, sizeof(t_redir), 1);
 	node->type = REDIR;
 	node->next = next;
 	node->src = STDIN_FILENO;

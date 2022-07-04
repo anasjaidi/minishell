@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 03:37:19 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:50:53 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:38:51 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_tree	*get_wp(int type, t_tree *left, t_tree *right)
 {
 	t_wp	*node;
 
-	node = ft_malloc(&g.adrs, sizeof(t_wp));
+	node = ft_malloc(&g.adrs, sizeof(t_wp), 1);
 	node->type = type;
 	node->left = left;
 	node->right = right;
@@ -27,7 +27,7 @@ t_tree	*get_cmdnode(t_cmd *next)
 {
 	t_cmd	*node;
 
-	node = ft_malloc(&g.adrs, sizeof(t_cmd));
+	node = ft_malloc(&g.adrs, sizeof(t_cmd), 1);
 	node->type = CMD;
 	node->next = NULL;
 	return ((t_tree *)node);
@@ -37,7 +37,7 @@ t_tree	*get_sub(t_tree *next)
 {
 	t_sub	*node;
 
-	node = ft_malloc(&g.adrs, sizeof(t_sub));
+	node = ft_malloc(&g.adrs, sizeof(t_sub), 1);
 	node->type = SUB;
 	node->next = next;
 	return ((t_tree *)node);
@@ -58,7 +58,7 @@ t_command	*get_nodelist(char *content)
 {
 	t_command	*node;
 
-	node = ft_malloc(&g.adrs, sizeof(t_command));
+	node = ft_malloc(&g.adrs, sizeof(t_command), 1);
 	node->type = CMD;
 	node->next = NULL;
 	node->content = content;

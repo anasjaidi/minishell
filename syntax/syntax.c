@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 19:09:36 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/03 22:14:04 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	check_bal_par(t_token **root)
 
 int	check_begin(t_token *root)
 {
-	if (root->type >= VAR && root->type <= OPAR)
+	if (root->type >= VAR && root->type <= 11)
 		return (1);
 	else
 		return (0);

@@ -6,13 +6,14 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:44:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/02 20:23:51 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 17:00:50 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 const char *types[] = {"subshell", "Command", "redirection", "pipe", "and", "or"};
+const char *types_token[] = {"VAR", "DGREAT", "DLESS", "LESS", "GREAT", "WORD", "WSPACE", "SQUOTE", "DQUOTE",  "OPAR", "WILD", "TILD", "AND", "OR", "PIPE", "CPAR"};
 
 int	main(int ac, char **av, char **env)
 {
@@ -23,7 +24,7 @@ int	main(int ac, char **av, char **env)
 	root = NULL;
 	g.adrs = NULL;
 	get_env(env);
-	display_env(g.env);
+
 	while (1)
 	{
 		str = readline("Minishell@robin:");
@@ -31,9 +32,11 @@ int	main(int ac, char **av, char **env)
 			head = token(str, &root);
 		free(str);
 		if (head)
-			display_tree(head, 0);
-		ft_collect(&g.adrs, g.adrs);
-		g.adrs = NULL;
+			cast_node(head);
+		if (g.adrs)
+			ft_collect(&g.adrs, g.adrs, 0);
 		root = NULL;
+		head = NULL;
 	}
+
 }

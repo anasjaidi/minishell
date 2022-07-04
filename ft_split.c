@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:30:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:38:17 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_write_split(char **split, char *str, char c)
 			j = 0;
 			while (ft_is_separator(str[i + j], c) == 0)
 				j++;
-			split[w] = (char *)ft_malloc(&g.adrs, sizeof(char) * (j + 1));
+			split[w] = (char *)ft_malloc(&g.adrs, sizeof(char) * (j + 1), 0);
 			if (!(split + w))
 				return (0);
 			ft_write_word(split[w], str + i, c);
@@ -87,7 +87,7 @@ char	**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	w = ft_words((char *)s, c);
-	rtn = (char **)ft_malloc(&g.adrs, sizeof(char *) * (w + 1));
+	rtn = (char **)ft_malloc(&g.adrs, sizeof(char *) * (w + 1), 0);
 	if (!rtn)
 		return (NULL);
 	if (!(ft_write_split(rtn, (char *) s, c)))

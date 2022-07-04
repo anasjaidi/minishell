@@ -6,13 +6,14 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/02 23:28:36 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:45:21 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 extern const char *types[];
+extern const char *types_token[];
 # include <stdio.h>
 # include <readline/readline.h>
 # include <stdlib.h>
@@ -95,6 +96,7 @@ typedef	struct	s_redir
 typedef struct s_collector
 {
 	void				*adr;
+	int					key;
 	struct s_collector	*next;
 }	t_collector;
 
@@ -114,13 +116,13 @@ typedef	struct s_global
 
 t_global	g;
 void	ft_putstr_fd(char *str, int fd);
-t_collector	*new_node_adr(void *adr);
+t_collector	*new_node_adr(void *adr, int key);
 t_tree		*get_rdr(t_token **head , t_tree *n);
 void		display_env(t_env *root);
-t_collector	**append_adr(t_collector **root, void *adr);
-void		*ft_malloc(t_collector **root, size_t size);
-void		ft_collect(t_collector **root, t_collector *node);
-
+t_collector	**append_adr(t_collector **root, void *adr, int key);
+void		*ft_malloc(t_collector **root, size_t size, int key);
+void		ft_collect(t_collector **root, t_collector *node, int key);
+void the_exit(int status);
 t_tree		*get_wp(int type, t_tree *left, t_tree *right);
 t_tree		*get_redir(t_tree *next, char *filename, int redtype);
 int			calc_size(char *start, char *end);
@@ -171,11 +173,32 @@ t_command	*new_nodecommand(char *str, int flag);
 void		append_in_cmdend(t_command **root, char *str, int type);
 void		display_tree(t_tree *tree, int in);
 int			ft_strlen(char *s);
-int			ft_memcmp(void *s1,void *s2, int n);
 int			herdoc(char *del);
 char		**ft_split(char const *s, char c);
 void		get_env(char **env);
 char	*get_env_value(char *str);
 t_env	*get_env_node(char *str);
-void	append_in_end_env(t_env **root, char *key, char *value)
+void	append_in_end_env(t_env **root, char *key, char *value);
+char	*ft_strjoin(char  *s1, char  *s2);
+char	**transfer(t_command *root);
+void ft_cd(char **argv);
+int	new_line(char *str);
+int	ft_echo(char **argv);
+void	cast_node(t_tree *root);
+void	delete_node_commnd(t_command **root, t_command *deleted);
+void	get_wild_value(t_command **root, t_command *node);
+void 	check_token_type(t_command **root, t_command *node);
+void	expend_tokens(t_command **root);
+void	ex_cmd(t_cmd *cmd);
+int	ft_exit(char **argv);
+int	ft_pwd(int fd);
+int exit_parse(char *str);
+char **ft_split_exp(char *line);
+void	display_exports();
+void	ft_export(char **argv);
+void	delete_env(t_env **root, t_env *deleted);
+void	ft_unset(char **argv);
+int	cmdlstsize(t_command *root);
+void	ft_putstr_fd(char *str, int fd);
+int	ft_strcmp(char *s1, char *s2);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:26:11 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/26 17:03:25 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:40:29 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*new_node_env(char *key, char *value)
 {
 	t_env	*new;
 
-	new = (t_env *)ft_malloc(&g.adrs, sizeof(t_env));
+	new = (t_env *)ft_malloc(&g.adrs, sizeof(t_env), 0);
 	if (!new)
 		return (NULL);
 	new->value = value;

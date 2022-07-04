@@ -6,11 +6,11 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:12:56 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/02 22:41:20 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 15:18:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 int	new_line(char *str)
 {
@@ -29,7 +29,7 @@ int	ft_echo(char **argv)
 	int	flag = 1;
 	while (argv[++i])
 	{
-		if (argv[i][0] && argv[i][0] == '-')
+		if (flag >= 0 && argv[i][0] && argv[i][0] == '-' &&argv[i][1])
 		{
 			if (new_line(argv[i]))
 			{
@@ -37,10 +37,14 @@ int	ft_echo(char **argv)
 				continue;
 			}
 		}
+		else
+			flag = -1;
 		ft_putstr_fd(argv[i], 1);
 		if (argv[i + 1])
 			ft_putstr_fd(" ", 1);
 	}
-	if (flag)
-		ft_putstr_fd(" ", 1);
+	if (flag > 0)
+		ft_putstr_fd("\n", 1);
+	return 0;
 }
+
