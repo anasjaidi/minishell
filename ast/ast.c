@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:32:46 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/03 22:02:17 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_tree	*get_cmdlist(t_token **head)
 	t_cmd	*ret;
 
 	ret = (t_cmd *)get_cmdnode(NULL);
-	while (*head && ((*head)->type == VAR || (*head)->type == WORD))
+	while (*head && ((*head)->type == VAR || (*head)->type == WORD || (*head)->type == TILD || (*head)->type == WILD))
 	{
 		append_in_cmdend(&ret->next, (*head)->str, (*head)->type);
 		*head = get_right(*head);

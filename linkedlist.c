@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:40:03 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*new_node(char *str, int flag)
 {
 	t_token	*new;
 
-	new = (t_token *)ft_malloc(&g.adrs, sizeof(t_token));
+	new = (t_token *)ft_malloc(&g.adrs, sizeof(t_token), 1);
 	if (!new)
 		return (NULL);
 	new->str = str;

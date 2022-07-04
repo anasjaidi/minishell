@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:05:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 18:40:45 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 16:38:28 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_command	*new_nodecommand(char *str, int flag)
 {
 	t_command	*new;
 
-	new = (t_command *)ft_malloc(&g.adrs, sizeof(t_command));
+	new = (t_command *)ft_malloc(&g.adrs, sizeof(t_command), 1);
 	if (!new)
 		return (NULL);
 	new->content = str;
@@ -68,6 +68,7 @@ void	display_tree(t_tree *tree, int in)
 			display_tree((t_tree *)(((t_sub *)tree)->next), in + 1));
 }
 
+
 int	ft_strlen(char *s)
 {
 	int	i;
@@ -78,14 +79,5 @@ int	ft_strlen(char *s)
 	return (i);
 }
 
-int	ft_memcmp(void *s1, void *s2, int n)
-{
-	int	i;
 
-	i = 0;
-	if (!n)
-		return (0);
-	while (*(char *)(s1 + i) == *(char *)(s2 + i) && i < n - 1)
-		i++;
-	return (*(unsigned char *)(s1 + i) - *(unsigned char *)(s2 + i));
-}
+

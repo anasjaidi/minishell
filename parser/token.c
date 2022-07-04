@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 21:21:43 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/03 21:06:51 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_tree	*token(char *str, t_token **root)
 {
 	int		i;
-	t_tree	*head;
+	t_tree	*head = NULL;
 
 	i = 0;
 	while (str[i])
