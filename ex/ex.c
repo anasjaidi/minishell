@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 21:26:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 15:21:08 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 19:33:27 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ void	get_wild_value(t_command **root, t_command *node)
 	item = readdir(dir);
 	while (item)
 	{
-		// printf("%s\n", item->d_name);
 		if (item->d_name[0] != '.')
 			append_in_cmdend(&head, item->d_name , 5);
 		item = readdir(dir);
-		// return ;
 	}
 	if (node == *root)
 	{
@@ -85,7 +83,6 @@ void	get_wild_value(t_command **root, t_command *node)
 		last->next = next;
 		node->next = head;
 	}
-		// display_nodetree(head);
 }
 
 void 	check_token_type(t_command **root, t_command *node)

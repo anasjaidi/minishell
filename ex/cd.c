@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 23:33:51 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 15:32:52 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 19:37:43 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ void ft_cd(char **argv)
 	}
 	else
 	{
-		// t_env *node;
-		// node = get_env_node("OLDPWD");
-		// if (node)
-		// 	node->value = cur;
-		// node = get_env_node("PWD");
-		// getcwd(buf, 255);
-		// cur = strdup(buf);
-		// if (node)
-		// 	node->value = cur;
+		t_env *node;
+		node = get_env_node("OLDPWD");
+		if (node)
+			node->value = cur;
+		node = get_env_node("PWD");
+		getcwd(buf, 255);
+		cur = strdup(buf);
+		if (node)
+			node->value = cur;
 	}
 	
 }
