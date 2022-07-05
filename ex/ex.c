@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 21:26:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 19:33:27 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 19:40:33 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ void	check_builtin(char **argv)
 		ft_export(argv);
 	else if (!ft_strcmp(*argv , "pwd"))
 		ft_pwd(1);
+	else if (!ft_strcmp(*argv , "env"))
+		ft_env(1);
 }
 
 void	ex_cmd(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 16:45:21 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/05 19:09:17 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ extern const char *types_token[];
 # include <fcntl.h>
 # include <string.h>
 # include <dirent.h>
+# include <limits.h>
 
 # define VAR 0
 # define DGREAT 1
@@ -128,6 +129,7 @@ t_tree		*get_redir(t_tree *next, char *filename, int redtype);
 int			calc_size(char *start, char *end);
 int			take_par(char *str, t_token **root);
 t_tree		*get_cmd(t_command *next);
+void	ft_env(int fd);
 t_tree		*get_sub(t_tree *next);
 int			take_word(char *str, t_token **root);
 t_token		*new_node(char *str, int flag);

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:48:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 19:30:37 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/04 19:39:40 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,10 @@ void	ft_export(char **argv)
 		else
 			node->value = spl[1];
 	}
+}
+
+void	ft_env(int fd)
+{
+	(void)fd;
+	display_env(g.env);
 }

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:12:56 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 15:18:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/05 19:08:28 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ int	ft_echo(char **argv)
 			}
 		}
 		else
-			flag = -1;
+			flag = flag == 0 || flag == -2? -2 : -1;
 		ft_putstr_fd(argv[i], 1);
 		if (argv[i + 1])
 			ft_putstr_fd(" ", 1);
 	}
-	if (flag > 0)
+	if (flag != -2)
 		ft_putstr_fd("\n", 1);
 	return 0;
 }

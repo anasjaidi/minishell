@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:26:11 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 16:40:29 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/05 03:46:56 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	display_env(t_env *root)
 		temp = root;
 		while (temp)
 		{
-			printf("%s=%s\n", temp->key, temp->value);
+			if (temp->value)
+				printf("%s=%s\n", temp->key, temp->value);
 			temp = temp->next;
 		}
 	}
