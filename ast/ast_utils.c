@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/28 19:05:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 19:16:46 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:15:37 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,31 @@ void	append_in_cmdend(t_command **root, char *str, int type)
 	}
 }
 
-void	display_tree(t_tree *tree, int in)
-{
-	int	i;
+// void	display_tree(t_tree *tree, int in)
+// {
+// 	int	i;
 
-	i = -1;
-	if (!tree)
-		return ;
-	while (++i < in)
-		printf("├──");
-	if (tree->type == CMD)
-		return (printf("%s ", types[tree->type - 16]), \
-			display_nodetree(((t_cmd *)tree)->next), (void)printf("\n"));
-	else if (tree->type >= 19)
-		return (printf("%s\n", types[tree->type - 16]), \
-			display_tree((t_tree *)(((t_wp *)tree)->left), in + 1), \
-				(void)display_tree((t_tree *)(((t_wp *)tree)->right), in + 1));
-	else if (tree->type == 18)
-		return (printf("%s %s\n", types[tree->type - 16], \
-			((t_redir *)tree)->filename), \
-				(void)display_tree((t_tree *)(((t_redir *)tree)->next), \
-					in + 1));
-	else if (tree->type == 16)
-		return (printf("%s \n", types[tree->type - 16]), \
-			display_tree((t_tree *)(((t_sub *)tree)->next), in + 1));
-}
+// 	i = -1;
+// 	if (!tree)
+// 		return ;
+// 	while (++i < in)
+// 		printf("├──");
+// 	if (tree->type == CMD)
+// 		return (printf("%s ", types[tree->type - 16]), \
+// 			display_nodetree(((t_cmd *)tree)->next), (void)printf("\n"));
+// 	else if (tree->type >= 19)
+// 		return (printf("%s\n", types[tree->type - 16]), \
+// 			display_tree((t_tree *)(((t_wp *)tree)->left), in + 1), \
+// 				(void)display_tree((t_tree *)(((t_wp *)tree)->right), in + 1));
+// 	else if (tree->type == 18)
+// 		return (printf("%s %s\n", types[tree->type - 16], \
+// 			((t_redir *)tree)->filename), \
+// 				(void)display_tree((t_tree *)(((t_redir *)tree)->next), \
+// 					in + 1));
+// 	else if (tree->type == 16)
+// 		return (printf("%s \n", types[tree->type - 16]), \
+// 			display_tree((t_tree *)(((t_sub *)tree)->next), in + 1));
+// }
 
 
 int	ft_strlen(char *s)

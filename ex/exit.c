@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:37:13 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/05 19:09:39 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:19:48 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int exit_parse(char *str)
 	while (str[++i])
 		if (!(str[i] >= 48 && str[i] <= 57))
 			the_exit(255);
-	return (atoi(str));
+	return (ft_atoi(str));
 }
 
 int	ft_exit(char **argv)
@@ -44,8 +44,8 @@ int	ft_pwd(int fd)
 		g.status = 0;
 	}
 	else
-		g.status = -1;
-		return 0;
+		g.status = 1;
+	return 0;
 }
 
 void the_exit(int status)

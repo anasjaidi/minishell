@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/03 22:14:04 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:18:01 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	check_begin(t_token *root)
 
 void	syntax_error(t_token **root)
 {
-	printf("syntax Eroor\n");
+	ft_putstr_fd("syntax Eroor\n", 1);
 }
 
 int	check_list(t_token *root)

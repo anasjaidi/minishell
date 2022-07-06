@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:06:12 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 16:40:03 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:15:27 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,41 +44,42 @@ void	append_in_end(t_token **root, char *str, int flag)
 	}
 }
 
-void	display_node(t_token *root)
-{
-	t_token	*temp;
+// void	display_node(t_token *root)
+// {
+// 	t_token	*temp;
 
-	temp = root;
-	if (!root)
-		printf("List is empty\n");
-	else
-	{
-		temp = root;
-		while (temp)
-		{
-			printf("[%d]=>[%s]\n", temp->type, temp->str);
-			temp = temp->next;
-		}
-	}
-}
+// 	temp = root;
+// 	if (!root)
+// 		return ;
+// 	else
+// 	{
+// 		temp = root;
+// 		while (temp)
+// 		{
+			
+// 			printf("[%d]=>[%s]\n", temp->type, temp->str);
+// 			temp = temp->next;
+// 		}
+// 	}
+// }
 
-void	display_nodetree(t_command *root)
-{
-	t_command	*temp;
+// void	display_nodetree(t_command *root)
+// {
+// 	t_command	*temp;
 
-	temp = root;
-	if (!root)
-		printf("List is empty");
-	else
-	{
-		temp = root;
-		while (temp)
-		{
-			printf("[%s] ", temp->content);
-			temp = temp->next;
-		}
-	}
-}
+// 	temp = root;
+// 	if (!root)
+// 		printf("List is empty");
+// 	else
+// 	{
+// 		temp = root;
+// 		while (temp)
+// 		{
+// 			printf("[%s] ", temp->content);
+// 			temp = temp->next;
+// 		}
+// 	}
+// }
 
 void	clr_lst(t_token **root, t_token *node)
 {

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:26:11 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/05 03:46:56 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:19:23 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,19 @@ void	display_env(t_env *root)
 
 	temp = root;
 	if (!root)
-		printf("List is empty");
+		return ;
 	else
 	{
 		temp = root;
 		while (temp)
 		{
 			if (temp->value)
-				printf("%s=%s\n", temp->key, temp->value);
+			{
+				ft_putstr_fd(temp->key, 1);
+				ft_putstr_fd("=", 1);
+				ft_putstr_fd(temp->value, 1);
+				ft_putstr_fd("\n", 1);
+			}
 			temp = temp->next;
 		}
 	}

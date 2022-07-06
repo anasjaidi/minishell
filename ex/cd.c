@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 23:33:51 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 19:37:43 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 15:40:46 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void ft_cd(char **argv)
 		if (!home)
 		{
 			ft_putstr_fd("bash: cd: HOME not set", 1);
+			g.status = 1;
 			return ;
 		}
 		argv[1] = home;
@@ -34,6 +35,7 @@ void ft_cd(char **argv)
 		ft_putstr_fd("bash: cd: ", 1);
 		ft_putstr_fd(argv[1] , 1);
 		ft_putstr_fd(": No such file or directory\n", 1);
+		g.status = 1;
 	}
 	else
 	{
@@ -46,6 +48,7 @@ void ft_cd(char **argv)
 		cur = strdup(buf);
 		if (node)
 			node->value = cur;
+		g.status = 0;
 	}
 	
 }

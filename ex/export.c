@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:48:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 19:39:40 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:11:27 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ void	display_exports()
 		ft_putstr_fd("\"\n", 1);
 		env = env->next;
 	}
+	g.status = 0;
 }
 
 void	ft_export(char **argv)
 {
 	int i = 0;
+	int status = 0;
 	char	**spl;
 	t_env *node;
 	if (!argv[1])
@@ -58,6 +60,7 @@ void	ft_export(char **argv)
 		spl = ft_split_exp(argv[i]);
 		if (!spl)
 		{
+			status = 1;
 			ft_putstr_fd("bash: export: ", 1);
 			ft_putstr_fd(argv[i], 1);
 			ft_putstr_fd(": not a valid identifier\n", 1);
@@ -79,6 +82,7 @@ void	ft_export(char **argv)
 		else
 			node->value = spl[1];
 	}
+	g.status = status;
 }
 
 void	ft_env(int fd)

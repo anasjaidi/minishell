@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:47:03 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/05 19:09:17 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:20:50 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ extern const char *types_token[];
 # include <string.h>
 # include <dirent.h>
 # include <limits.h>
+# include <stdbool.h>
+# include <errno.h>
 
 # define VAR 0
 # define DGREAT 1
@@ -131,6 +133,7 @@ int			take_par(char *str, t_token **root);
 t_tree		*get_cmd(t_command *next);
 void	ft_env(int fd);
 t_tree		*get_sub(t_tree *next);
+int	ft_atoi(const char *str);
 int			take_word(char *str, t_token **root);
 t_token		*new_node(char *str, int flag);
 void		display_node(t_token *root);

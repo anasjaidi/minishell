@@ -6,24 +6,68 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 21:26:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 19:40:33 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:17:18 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+
+void	ex_pipe(t_wp *root)
+{
+	int pid;
+	int status;
+	int pids[2];
+	int	fd[0];
+	if (pipe(fd) < 0)
+		return ;
+	pids[0] = fork();
+	if (!pids[0])
+	{
+		close(1);
+		dup2(fd[1], 1);
+		close(fd[0]);
+		close(fd[1]);
+		cast_node(root->left);
+	}
+	pids[1] = fork();
+	if (!pids[1])
+	{
+		close(0);
+		dup2(fd[0], 0);
+		close(fd[0]);
+		close(fd[1]);
+		cast_node(root->right);
+	}
+	close(fd[0]);
+	close(fd[1]);
+	pid = wait(&status);
+	pid = wait(&status);
+}
+
 void	cast_node(t_tree *root)
 {
-	// if (root->type == SUB)
-	// 	ex_sub((t_sub *)root);
-	if (root->type == CMD)
+	if (root->type == SUB)
+		cast_node(((t_sub *)root)->next);
+	else if (root->type == CMD)
 		ex_cmd((t_cmd *)root);
 	// if (root->type == REDIR)
 	// 	ex_redir((t_sub *)root);
-	// if (root->type == T_PIPE)
-	// 	ex_pipe((t_wp *)root);
-	// if (root->type == T_AND)
-	// 	ex_and_or((t_wp *)root);
+	else if (root->type == T_AND)
+	{
+		cast_node(((t_wp*)root)->left);
+		if (!g.status)
+			cast_node(((t_wp*)root)->right);
+	}
+	else if (root->type == T_OR)
+	{
+		cast_node(((t_wp*)root)->left);
+		if (g.status)
+			cast_node(((t_wp*)root)->right);
+	}
+	else if (root->type >= T_PIPE)	
+		return (ex_pipe(((t_wp*)root)));
+
 }
 
 void	delete_node_commnd(t_command **root, t_command *deleted)
@@ -93,10 +137,7 @@ void 	check_token_type(t_command **root, t_command *node)
 		delete_node_commnd(root, node);
 	}
 	else  if (node->type == TILD)
-	{
-		printf("hpme is %s\n", get_env_value("HOME"));
 		node->content = get_env_value("HOME");
-	}
 	else if (node->type == VAR)
 		node->content = get_env_value(node->content + 1);
 }
@@ -111,33 +152,100 @@ void	expend_tokens(t_command **root)
 	while (tmp)
 	{
 		check_token_type(root, tmp);
-		// printf("%s ", types_token[tmp->type]);
 		tmp = tmp->next;
 	}
 }
 
-void	check_builtin(char **argv)
+bool	check_builtin(char **argv)
 {
 	if (!ft_strcmp(*argv , "echo"))
-		ft_echo(argv);
+		return (ft_echo(argv), true);
 	else if (!ft_strcmp(*argv , "unset"))
-		ft_unset(argv);
+		return (ft_unset(argv), true);
 	else if (!ft_strcmp(*argv , "cd"))
-		ft_cd(argv);
+		return (ft_cd(argv), true);
 	else if (!ft_strcmp(*argv , "exit"))
-		ft_exit(argv);
+		return (ft_exit(argv), true);
 	else if (!ft_strcmp(*argv , "export"))
-		ft_export(argv);
+		return (ft_export(argv), true);
 	else if (!ft_strcmp(*argv , "pwd"))
-		ft_pwd(1);
+		return (ft_pwd(1), true);
 	else if (!ft_strcmp(*argv , "env"))
-		ft_env(1);
+		return (ft_env(1), true);
+	return (false);
+}
+
+int find_path(char **argv)
+{
+	char *path = get_env_value("PATH");
+	char **spl = ft_split(path, ':');
+	while (*spl)
+	{
+		*spl = ft_strjoin(*spl, "/");
+		if (!access(ft_strjoin(*spl, *argv), 0))
+			return (*argv = ft_strjoin(*spl, *argv), 1);
+		spl++;
+	}
+	return 0;
+}
+
+int	envlstsize(t_env *root)
+{
+	int i = 0;
+	while (root)
+	{
+		i++;
+		root = root->next;
+	}
+	return (i);
+}
+
+char	**transfer_env(t_env *env)
+{
+	int i = -1;
+	int n = envlstsize(env);
+	char	*key;
+	char **argv = ft_malloc(&g.adrs, (n + 1) * sizeof(char *), 1);
+	while (env)
+	{
+		key = ft_strjoin(env->key, "=");
+		argv[++i] =	ft_strjoin(key, env->value);
+		env = env->next;
+	}
+	argv[n] = NULL;
+	return (argv);
+}
+
+int getst(int status) {
+	if (WIFEXITED(status))
+		return WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		return 128 + WTERMSIG(status);
+	return 1;
+}
+
+void	check_extern(char **argv)
+{
+	int status;
+	find_path(argv);
+	int pid = fork();
+	if (pid == 0)
+	{
+		execve(*argv, argv, transfer_env(g.env));
+		ft_putstr_fd("execve: ", 1);
+		ft_putstr_fd(argv[0], 1);
+		ft_putstr_fd(": command not found\n", 1);
+		exit(127);
+	}
+	waitpid(pid, &status, 0);
+	g.status = getst(status);
 }
 
 void	ex_cmd(t_cmd *cmd)
 {
 	expend_tokens(&cmd->next);
 	char **argv = transfer(cmd->next);
-	// ft_echo(argv);
-	check_builtin(argv);
+	if (check_builtin(argv))
+		return ;
+	check_extern(argv);
 }
