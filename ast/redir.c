@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:38:05 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 16:38:57 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 00:06:13 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,9 @@ t_tree	*get_redir(t_tree *next, char *filename, int redtype)
 {
 	t_redir	*node;
 
-	node = ft_malloc(&g.adrs, sizeof(t_redir), 1);
+	node = ft_malloc(&g_global.adrs, sizeof(t_redir), 1);
 	node->type = REDIR;
+	node->redtype = redtype;
 	node->next = next;
 	node->src = STDIN_FILENO;
 	node->mode = O_RDONLY;
@@ -43,9 +44,9 @@ t_tree	*get_redir(t_tree *next, char *filename, int redtype)
 	{
 		node->src = STDOUT_FILENO;
 		if (redtype == GREAT)
-			node->mode = O_CREAT | O_WRONLY | O_TRUNC;
+			node->mode = O_CREAT | O_RDWR| O_TRUNC ;
 		else
-			node->mode = O_CREAT | O_WRONLY | O_APPEND;
+			node->mode = O_CREAT | O_RDWR | O_APPEND;
 	}
 	if (redtype == DLESS)
 		node->dst = herdoc(filename);

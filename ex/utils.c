@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:44:59 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 17:20:43 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/07 23:55:01 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_putstr_fd(char *str, int fd)
 {
 	int	i;
-	
+
 	if (!str)
 		return ;
 	i = 0;
@@ -54,7 +54,9 @@ int	ft_atoi(const char *str)
 
 int	cmdlstsize(t_command *root)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (root)
 	{
 		i++;
@@ -63,16 +65,50 @@ int	cmdlstsize(t_command *root)
 	return (i);
 }
 
+char	*ft_strdup(char *s1)
+{
+	int		i;
+	char	*ptr;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	ptr = (char *)ft_malloc(&g_global.adrs, i * sizeof(char) + 1, 1);
+	if (!ptr)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		ptr[i] = s1[i];
+	ptr[i] = 0;
+	return (ptr);
+}
+
 char	**transfer(t_command *root)
 {
-	int i = -1;
-	int n = cmdlstsize(root);
-	char **argv = ft_malloc(&g.adrs, (n + 1) * sizeof(char *), 1);
+	int		i;
+	int		n;
+	char	**argv;
+
+	i = -1;
+	n = cmdlstsize(root);
+	argv = ft_malloc(&g_global.adrs, (n + 1) * sizeof(char *), 1);
 	while (root)
 	{
-		argv[++i] =	root->content;
+		argv[++i] = root->content;
 		root = root->next;
 	}
 	argv[n] = NULL;
 	return (argv);
+}
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	if (n == 0)
+		return (0);
+	while (s1[i] && s2[i] && (s1[i] == s2[i]) && i < n - 1)
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

@@ -6,11 +6,12 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 21:26:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 17:17:18 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 01:27:47 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <string.h>
 
 
 void	ex_pipe(t_wp *root)
@@ -29,6 +30,7 @@ void	ex_pipe(t_wp *root)
 		close(fd[0]);
 		close(fd[1]);
 		cast_node(root->left);
+		the_exit(g_global.status);
 	}
 	pids[1] = fork();
 	if (!pids[1])
@@ -38,11 +40,33 @@ void	ex_pipe(t_wp *root)
 		close(fd[0]);
 		close(fd[1]);
 		cast_node(root->right);
+		the_exit(g_global.status);
 	}
 	close(fd[0]);
 	close(fd[1]);
 	pid = wait(&status);
 	pid = wait(&status);
+}
+
+void	ex_redir(t_redir *root)
+{
+	int fd = open(root->filename, root->mode, S_IRUSR | S_IWUSR);
+	int pid = fork();
+	int status;
+	if (!pid)
+	{
+		if (root->redtype == GREAT || root->redtype == DGREAT)
+			dup2(fd, 1);
+		else if (root->redtype == LESS)
+			dup2(fd, 0);
+		else
+			dup2(root->dst , 0);
+		cast_node(root->next);
+		exit(g_global.status);
+	}
+	waitpid(pid, &status, 0);
+	g_global.status = getst(status);
+	
 }
 
 void	cast_node(t_tree *root)
@@ -51,23 +75,22 @@ void	cast_node(t_tree *root)
 		cast_node(((t_sub *)root)->next);
 	else if (root->type == CMD)
 		ex_cmd((t_cmd *)root);
-	// if (root->type == REDIR)
-	// 	ex_redir((t_sub *)root);
+	if (root->type == REDIR)
+		ex_redir((t_redir *)root);
 	else if (root->type == T_AND)
 	{
 		cast_node(((t_wp*)root)->left);
-		if (!g.status)
+		if (!g_global.status)
 			cast_node(((t_wp*)root)->right);
 	}
 	else if (root->type == T_OR)
 	{
 		cast_node(((t_wp*)root)->left);
-		if (g.status)
+		if (g_global.status)
 			cast_node(((t_wp*)root)->right);
 	}
 	else if (root->type >= T_PIPE)	
-		return (ex_pipe(((t_wp*)root)));
-
+		ex_pipe(((t_wp*)root));
 }
 
 void	delete_node_commnd(t_command **root, t_command *deleted)
@@ -138,6 +161,10 @@ void 	check_token_type(t_command **root, t_command *node)
 	}
 	else  if (node->type == TILD)
 		node->content = get_env_value("HOME");
+	else if (node->type == VAR && !ft_strcmp(node->content, "$?"))
+		node->content = ft_itoa(g_global.status);
+	else if (node->type == VAR && !ft_strcmp(node->content, "$$"))
+		node->content = ft_itoa(getpid());
 	else if (node->type == VAR)
 		node->content = get_env_value(node->content + 1);
 }
@@ -177,8 +204,16 @@ bool	check_builtin(char **argv)
 
 int find_path(char **argv)
 {
-	char *path = get_env_value("PATH");
-	char **spl = ft_split(path, ':');
+	char	*path;
+	char	**spl;
+	char	*rtn = NULL;
+
+	path = get_env_value("PATH");
+	if (!path)
+		return 0;
+	spl = ft_split(path, ':');
+	if (*spl == NULL)
+		return 0;
 	while (*spl)
 	{
 		*spl = ft_strjoin(*spl, "/");
@@ -186,12 +221,14 @@ int find_path(char **argv)
 			return (*argv = ft_strjoin(*spl, *argv), 1);
 		spl++;
 	}
-	return 0;
+	return (0);
 }
 
 int	envlstsize(t_env *root)
 {
-	int i = 0;
+	int i;
+
+	i = 0;
 	while (root)
 	{
 		i++;
@@ -205,7 +242,7 @@ char	**transfer_env(t_env *env)
 	int i = -1;
 	int n = envlstsize(env);
 	char	*key;
-	char **argv = ft_malloc(&g.adrs, (n + 1) * sizeof(char *), 1);
+	char **argv = ft_malloc(&g_global.adrs, (n + 1) * sizeof(char *), 1);
 	while (env)
 	{
 		key = ft_strjoin(env->key, "=");
@@ -218,10 +255,10 @@ char	**transfer_env(t_env *env)
 
 int getst(int status) {
 	if (WIFEXITED(status))
-		return WEXITSTATUS(status);
+		return (WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
-		return 128 + WTERMSIG(status);
-	return 1;
+		return (128 + WTERMSIG(status));
+	return (1);
 }
 
 void	check_extern(char **argv)
@@ -229,16 +266,19 @@ void	check_extern(char **argv)
 	int status;
 	find_path(argv);
 	int pid = fork();
+	g_global.runing = 1;
 	if (pid == 0)
 	{
-		execve(*argv, argv, transfer_env(g.env));
+		sigreset();
+		execve(*argv, argv, transfer_env(g_global.env));
 		ft_putstr_fd("execve: ", 1);
 		ft_putstr_fd(argv[0], 1);
 		ft_putstr_fd(": command not found\n", 1);
-		exit(127);
+		the_exit(127);
 	}
+	g_global.runing = 0;
 	waitpid(pid, &status, 0);
-	g.status = getst(status);
+	g_global.status = getst(status);
 }
 
 void	ex_cmd(t_cmd *cmd)

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 15:50:27 by anasjaidi         #+#    #+#             */
-/*   Updated: 2022/07/04 17:05:29 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 21:19:40 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ t_collector	**append_adr(t_collector **root, void *adr, int key)
 	t_collector	*tmp;
 
 	tmp = *root;
-	
-	while (*root && tmp->next)
-	{
-		if (!tmp->adr)
-		{
-			return (root);
-		}
-		tmp = tmp->next;
-	}
 	node = new_node_adr(adr, key);
 	if (!*root)
 		return (*root = node, root);
@@ -68,9 +59,12 @@ void	ft_collect(t_collector **root, t_collector *node, int key)
 	if (key)
 	{
 		free(node->adr);
+		node->adr = NULL;
 		free(node);
+		g_global.adrs = NULL;
+		g_global.env = NULL;
 	}
-	else if (!key && node->key)
+	else if (!key && node->key && node->adr)
 	{
 		free(node->adr);
 		node->adr = NULL;

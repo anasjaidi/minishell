@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/21 21:00:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 17:18:01 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 17:34:17 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_syntax(t_token **root)
 	else if ((*root)->type != 6)
 		temp = *root;
 	else
-		return 0;
+		return (0);
 	if (!check_begin(temp))
 		return ((void)(syntax_error(root)), 0);
 	while (temp)
@@ -39,7 +39,7 @@ int	check_bal_par(t_token **root)
 	t_token	*temp;
 
 	if (!*root)
-		return 0;
+		return (0);
 	l = 0;
 	temp = *root;
 	while (temp)
@@ -47,7 +47,7 @@ int	check_bal_par(t_token **root)
 		if (temp->type == 9)
 			l++;
 		else if (temp->type == 15)
-			l--;
+			l-- ;
 		if (l < 0)
 			return ((void)(syntax_error(root)), 0);
 		temp = temp->next;

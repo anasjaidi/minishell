@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:26:11 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 17:19:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 21:13:39 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*new_node_env(char *key, char *value)
 {
 	t_env	*new;
 
-	new = (t_env *)ft_malloc(&g.adrs, sizeof(t_env), 0);
+	new = (t_env *)ft_malloc(&g_global.adrs, sizeof(t_env), 0);
 	if (!new)
 		return (NULL);
 	new->value = value;
@@ -73,7 +73,7 @@ void	get_env(char **env)
 	while (*env)
 	{
 		spl = ft_split(*env, '=');
-		append_in_end_env(&g.env, spl[0], spl[1]);
+		append_in_end_env(&g_global.env, spl[0], spl[1]);
 		env++;
 	}
 }

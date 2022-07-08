@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:51:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 16:39:32 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/07 17:30:58 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	take_dquote(char *str, t_token **root)
 {
 	int	i;
 	int	last;
+
 
 	i = 0;
 	last = 0;
@@ -60,7 +61,7 @@ int	check_closed_dq(t_token **root, char	*str, int i, int last)
 int	take_qvar(char *str, t_token **root)
 {
 	char	*comp;
-	int		i;
+	int		i = 0;
 	int		j;
 
 	comp = "!@#$*+-~./, \t\r\f\v\n\"()";
@@ -80,7 +81,7 @@ void	*add_item(char *start, char *end, int flag, t_token **root)
 	int		i;
 
 	i = -1;
-	str = (char *)ft_malloc(&g.adrs, calc_size(start, end), 1);
+	str = (char *)ft_malloc(&g_global.adrs, calc_size(start, end), 1);
 	if (!str)
 		return (NULL);
 	while (start != end)

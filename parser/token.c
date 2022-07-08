@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 16:33:39 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/03 21:06:51 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 00:00:15 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 t_tree	*token(char *str, t_token **root)
 {
 	int		i;
-	t_tree	*head = NULL;
+	t_tree	*head;
 
 	i = 0;
+	head = NULL;
 	while (str[i])
 	{
 		i += check_char(str + i, root);
@@ -89,6 +90,10 @@ int	take_var(char *str, t_token **root)
 	int		j;
 
 	i = 0;
+	if (!ft_strncmp(str, "$$", 2))
+		return (add_item(str, str + 2, VAR, root), 2);
+	if (*str == '$' && *(str + 1) != '$')
+		return (add_item(str, str + 1, WORD, root), 1);
 	comp = "&|\'\"$*<>~ \t\r\f\v\n()";
 	while (str[++i])
 	{

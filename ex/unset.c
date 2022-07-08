@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 23:54:26 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 17:08:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 18:26:42 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,15 @@
 void	delete_env(t_env **root, t_env *deleted)
 {
 	t_env	*tmp;
-	
+	t_env	*last;
+	t_env	*deletedprev;
+
 	if (!deleted)
 		return ;
 	if (deleted == *root)
 		*root = deleted->next;
 	else if (!deleted->next)
 	{
-		t_env *last;
 		last = *root;
 		while (last->next->next)
 			last = last->next;
@@ -30,7 +31,6 @@ void	delete_env(t_env **root, t_env *deleted)
 	}
 	else
 	{
-		t_env *deletedprev;
 		deletedprev = *root;
 		while (deletedprev->next != deleted)
 			deletedprev = deletedprev->next;
@@ -40,8 +40,10 @@ void	delete_env(t_env **root, t_env *deleted)
 
 void	ft_unset(char **argv)
 {
-	int i = 0;
+	int	i;
+
+	i = 0;
 	while (argv[++i])
-		delete_env(&g.env, get_env_node(argv[i]));
-	g.status = 0;
+		delete_env(&g_global.env, get_env_node(argv[i]));
+	g_global.status = 0;
 }

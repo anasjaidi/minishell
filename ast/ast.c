@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/03 22:02:17 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/07 21:49:05 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,36 @@ t_tree	*get_pipe(t_token **head)
 t_tree	*get_cmdlist(t_token **head)
 {
 	t_cmd	*ret;
+	char	*join = "";
 
 	ret = (t_cmd *)get_cmdnode(NULL);
-	while (*head && ((*head)->type == VAR || (*head)->type == WORD || (*head)->type == TILD || (*head)->type == WILD))
+	while (*head && ((*head)->type == VAR \
+	|| (*head)->type == WORD || (*head)->type == TILD || (*head)->type == WILD))
 	{
+		if (!(*head)->str[0])
+		{
+			append_in_cmdend(&ret->next, "", WORD);
+			*head = get_right(*head);
+			continue;
+		}
+		join = "";
+		int i = 1;
+		while (*head && (*head)->type == WORD)
+		{
+			join = ft_strjoin(join, (*head)->str);
+			*head = (*head)->next;
+			i = 0;
+		}
+		if (*join && (*head))
+			(*head)->str = join;
+		else if (*join && !*head)
+			return (append_in_cmdend(&ret->next, join, WORD), (t_tree *)ret);
 		append_in_cmdend(&ret->next, (*head)->str, (*head)->type);
-		*head = get_right(*head);
+		if (!(*head && ((*head)->type == VAR \
+	|| (*head)->type == TILD || (*head)->type == WILD || (*head)->type == WSPACE)))
+			break ;
+		else 
+			*head = get_right(*head);	
 	}
 	return ((t_tree *)ret);
 }

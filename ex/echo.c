@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 18:12:56 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 15:41:15 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/06 21:27:03 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,39 @@ int	new_line(char *str)
 	return (1);
 }
 
+int	get_echo_flag(int flag)
+{
+	if (flag == 0 || flag == -2)
+		return (-2);
+	else
+		return (-1);
+}
+
 int	ft_echo(char **argv)
 {
-	int i = 0;
-	int	flag = 1;
+	int	i;
+	int	flag;
+
+	i = 0;
+	flag = 1;
 	while (argv[++i])
 	{
-		if (flag >= 0 && argv[i][0] && argv[i][0] == '-' &&argv[i][1])
+		if (flag >= 0 && argv[i][0] && argv[i][0] == '-' && argv[i][1])
 		{
 			if (new_line(argv[i]))
 			{
 				flag = 0;
-				continue;
+				continue ;
 			}
 		}
 		else
-			flag = flag == 0 || flag == -2? -2 : -1;
+			flag = get_echo_flag(flag);
 		ft_putstr_fd(argv[i], 1);
 		if (argv[i + 1])
 			ft_putstr_fd(" ", 1);
 	}
 	if (flag != -2)
 		ft_putstr_fd("\n", 1);
-	g.status = 0;
-	return 0;
+	g_global.status = 0;
+	return (0);
 }
-
