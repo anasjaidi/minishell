@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:38:05 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 00:06:13 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 18:34:05 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_tree	*get_redir(t_tree *next, char *filename, int redtype)
 	{
 		node->src = STDOUT_FILENO;
 		if (redtype == GREAT)
-			node->mode = O_CREAT | O_RDWR| O_TRUNC ;
+			node->mode = O_CREAT | O_RDWR | O_TRUNC ;
 		else
 			node->mode = O_CREAT | O_RDWR | O_APPEND;
 	}
@@ -54,10 +54,18 @@ t_tree	*get_redir(t_tree *next, char *filename, int redtype)
 	return ((t_tree *)node);
 }
 
+void	get_rdr_utils(t_token **head, t_command **root)
+{
+	while (*head && ((*head)->type == VAR || (*head)->type == WORD))
+	{
+		append_in_cmdend(root, (*head)->str, (*head)->type);
+		*head = get_right(*head);
+	}
+}
+
 t_tree	*get_rdr(t_token **head, t_tree *n)
 {
 	t_tree		*next;
-	t_command	**root;
 	t_cmd		*next2;
 	t_tree		*ret;
 
@@ -75,11 +83,7 @@ t_tree	*get_rdr(t_token **head, t_tree *n)
 		ret = get_redir(next, (*head)->str, get_left(*head)->type);
 		next = ret;
 		*head = get_right(*head);
-		while (*head && ((*head)->type == VAR || (*head)->type == WORD))
-		{
-			append_in_cmdend(&next2->next, (*head)->str, (*head)->type);
-			*head = get_right(*head);
-		}
+		get_rdr_utils(head, &((t_cmd *)ret)->next);
 	}
 	if (ret)
 		return (ret);

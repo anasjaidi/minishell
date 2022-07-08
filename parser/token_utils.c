@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:55:07 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/06 17:17:44 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:28:58 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	calc_size(char *start, char *end)
 	return (i);
 }
 
-int	check_flag(char *str, int q, t_token **root)
+int	check_flag(char *str, int q)
 {
 	if (*str == '|')
 	{
