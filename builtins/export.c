@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:48:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 21:56:59 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 22:20:27 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ int	ft_export_utils(char **argv, char **spl, int *status, int i)
 	&& argv[i][ft_strlen(argv[i]) - 1] == '='))
 	{
 		*status = 1;
-		ft_putstr_fd("bash: export: ", 1);
-		ft_putstr_fd(argv[i], 1);
-		ft_putstr_fd(": not a valid identifier\n", 1);
+		ft_putstr_fd("bash: export: ", 2);
+		ft_putstr_fd(argv[i], 2);
+		ft_putstr_fd(": not a valid identifier\n", 2);
 		return (1);
 	}
 	if (spl[0][ft_strlen(spl[0]) - 1] == '+')

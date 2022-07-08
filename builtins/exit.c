@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 16:37:13 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 16:52:47 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 22:20:19 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_exit(char **argv)
 	if (!argv[1])
 		the_exit(g_global.status);
 	if (argv[2])
-		return (ft_putstr_fd("exit: too many arguments\n", 1), \
+		return (ft_putstr_fd("exit: too many arguments\n", 2), \
 		g_global.status = 1, 0);
 	the_exit(exit_parse(argv[1]));
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/08 18:13:01 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 18:41:43 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 22:26:10 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	check_extern(char **argv)
 	int	pid;
 	int	status;
 
-	pid = fork();
-	find_path(argv);
 	g_global.runing = 1;
+	find_path(argv);
+	pid = fork();
 	if (pid == 0)
 	{
 		sigreset();
@@ -29,9 +29,9 @@ void	check_extern(char **argv)
 		ft_putstr_fd(": command not found\n", 1);
 		the_exit(127);
 	}
-	g_global.runing = 0;
 	waitpid(pid, &status, 0);
 	g_global.status = getst(status);
+	g_global.runing = 0;
 }
 
 void	ex_cmd(t_cmd *cmd)
