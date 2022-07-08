@@ -1,50 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/30 18:12:56 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 15:18:13 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/08 16:41:11 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 16:41:25 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	new_line(char *str)
+void	ft_putstr_fd(char *str, int fd)
 {
 	int	i;
 
+	if (!str)
+		return ;
 	i = 0;
-	while (str[++i])
-		if (str[i] != 'n')
-			return (0);
-	return (1);
-}
-
-int	ft_echo(char **argv)
-{
-	int i = 0;
-	int	flag = 1;
-	while (argv[++i])
+	while (str[i])
 	{
-		if (flag >= 0 && argv[i][0] && argv[i][0] == '-' &&argv[i][1])
-		{
-			if (new_line(argv[i]))
-			{
-				flag = 0;
-				continue;
-			}
-		}
-		else
-			flag = -1;
-		ft_putstr_fd(argv[i], 1);
-		if (argv[i + 1])
-			ft_putstr_fd(" ", 1);
+		write(fd, &str[i], 1);
+		i++;
 	}
-	if (flag > 0)
-		ft_putstr_fd("\n", 1);
-	return 0;
 }
-

@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   transfer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 15:28:33 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/08 18:12:08 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 18:49:18 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tree	*get_full(t_token **head)
+char	**transfer(t_command *root)
 {
-	t_tree	*ret;
-	t_token	*tmp;
+	int		i;
+	int		n;
+	char	**argv;
 
-	tmp = *head;
-	if (tmp == *head && tmp->type != 6)
-		;
-	else
-		tmp = get_right(tmp);
-	ret = get_block(&tmp);
-	return ((t_tree *)ret);
+	i = -1;
+	n = cmdlstsize(root);
+	argv = ft_malloc(&g_global.adrs, (n + 1) * sizeof(char *), 1);
+	while (root)
+	{
+		argv[++i] = root->content;
+		root = root->next;
+	}
+	argv[n] = NULL;
+	return (argv);
 }

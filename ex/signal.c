@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 15:28:33 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/06 21:32:15 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 22:24:14 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tree	*get_full(t_token **head)
+void	handler(int sig)
 {
-	t_tree	*ret;
-	t_token	*tmp;
+	if (g_global.runing)
+		return ;
+	g_global.status = 128 + sig;
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
 
-	tmp = *head;
-	if (tmp == *head && tmp->type != 6)
-		;
-	else
-		tmp = get_right(tmp);
-	ret = get_block(&tmp);
-	return ((t_tree *)ret);
+void	listen(void)
+{
+	signal(SIGINT, &handler);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sigreset(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }

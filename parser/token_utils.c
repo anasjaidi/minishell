@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:55:07 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/06/25 17:35:23 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 17:28:58 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	unclosed_quote(t_token **root)
 {
-	printf("unclosed quote\n");
+	ft_putstr_fd("unclosed quote\n", 1);
 	*root = NULL;
 }
 
 int	invalid_token(t_token **root, char *str)
 {
 	*root = NULL;
-	printf("unexpected token\n");
+	ft_putstr_fd("unexpected token\n", 1);
 	return (get_last(str));
 }
 
@@ -45,7 +45,7 @@ int	calc_size(char *start, char *end)
 	return (i);
 }
 
-int	check_flag(char *str, int q, t_token **root)
+int	check_flag(char *str, int q)
 {
 	if (*str == '|')
 	{

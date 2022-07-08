@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 15:28:33 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/02 23:54:26 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 16:21:48 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-t_tree	*get_full(t_token **head)
+void	ft_unset(char **argv)
 {
-	t_tree	*ret;
-	t_token	*tmp;
+	int	i;
 
-	tmp = *head;
-	if (tmp == *head && tmp->type != 6)
-		;
-	else
-		tmp = get_right(tmp);
-	ret = get_block(&tmp);
-	return ((t_tree *)ret);
+	i = 0;
+	while (argv[++i])
+		delete_env(&g_global.env, get_env_node(argv[i]));
+	g_global.status = 0;
 }

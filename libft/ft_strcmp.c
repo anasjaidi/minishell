@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 15:28:33 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/08 16:19:55 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 16:20:11 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tree	*get_full(t_token **head)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_tree	*ret;
-	t_token	*tmp;
+	int	i;
 
-	tmp = *head;
-	if (tmp == *head && tmp->type != 6)
-		;
-	else
-		tmp = get_right(tmp);
-	ret = get_block(&tmp);
-	return ((t_tree *)ret);
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+	{
+		i++;
+	}
+	return (s1[i] - s2[i]);
 }

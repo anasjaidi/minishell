@@ -1,28 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   env_geters.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/02 23:54:26 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/03 21:17:51 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/08 16:18:12 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 17:30:47 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
+
+t_env	*get_env_node(char *str)
+{
+	t_env	*tmp;
+
+	tmp = g_global.env;
+	while (tmp)
+	{
+		if (!ft_strcmp(str, tmp->key))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+char	*get_env_value(char *str)
+{
+	t_env	*tmp;
+
+	tmp = g_global.env;
+	while (tmp)
+	{
+		if (!ft_strcmp(str, tmp->key))
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
 
 void	delete_env(t_env **root, t_env *deleted)
 {
-	t_env	*tmp;
-	
+	t_env	*last;
+	t_env	*deletedprev;
+
 	if (!deleted)
 		return ;
 	if (deleted == *root)
 		*root = deleted->next;
 	else if (!deleted->next)
 	{
-		t_env *last;
 		last = *root;
 		while (last->next->next)
 			last = last->next;
@@ -30,7 +58,6 @@ void	delete_env(t_env **root, t_env *deleted)
 	}
 	else
 	{
-		t_env *deletedprev;
 		deletedprev = *root;
 		while (deletedprev->next != deleted)
 			deletedprev = deletedprev->next;
@@ -38,10 +65,15 @@ void	delete_env(t_env **root, t_env *deleted)
 	}
 }
 
-void	ft_unset(char **argv)
+int	envlstsize(t_env *root)
 {
-	int i = 0;
-	while (argv[++i])
-		delete_env(&g.env, get_env_node(argv[i]));
-		
+	int	i;
+
+	i = 0;
+	while (root)
+	{
+		i++;
+		root = root->next;
+	}
+	return (i);
 }

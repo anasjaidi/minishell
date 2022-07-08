@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 15:28:33 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/08 16:40:38 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 16:40:49 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tree	*get_full(t_token **head)
+int	ft_atoi(const char *str)
 {
-	t_tree	*ret;
-	t_token	*tmp;
+	int	i;
+	int	s;
+	int	r;
 
-	tmp = *head;
-	if (tmp == *head && tmp->type != 6)
-		;
-	else
-		tmp = get_right(tmp);
-	ret = get_block(&tmp);
-	return ((t_tree *)ret);
+	i = 0;
+	s = 1;
+	r = 0;
+	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			s *= -1;
+		i++;
+	}
+	while (str[i] >= 48 && str[i] <= 57)
+	{
+		r *= 10;
+		r += str[i] - 48;
+		i++;
+	}
+	return (r * s);
 }

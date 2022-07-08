@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ast.c                                              :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/21 01:19:23 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 15:28:33 by ajaidi           ###   ########.fr       */
+/*   Created: 2022/07/08 16:41:41 by ajaidi            #+#    #+#             */
+/*   Updated: 2022/07/08 16:41:58 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_tree	*get_full(t_token **head)
+char	*ft_strdup(char *s1)
 {
-	t_tree	*ret;
-	t_token	*tmp;
+	int		i;
+	char	*ptr;
 
-	tmp = *head;
-	if (tmp == *head && tmp->type != 6)
-		;
-	else
-		tmp = get_right(tmp);
-	ret = get_block(&tmp);
-	return ((t_tree *)ret);
+	i = 0;
+	while (s1[i])
+		i++;
+	ptr = (char *)ft_malloc(&g_global.adrs, i * sizeof(char) + 1, 1);
+	if (!ptr)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		ptr[i] = s1[i];
+	ptr[i] = 0;
+	return (ptr);
 }

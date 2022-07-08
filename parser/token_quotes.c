@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token2.c                                           :+:      :+:    :+:   */
+/*   token_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 22:51:17 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/04 16:39:32 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/07/08 15:59:22 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	take_dquote(char *str, t_token **root)
 	return (last);
 }
 
-int	check_closed_dq(t_token **root, char	*str, int i, int last)
+int	check_closed_dq(t_token **root, char *str, int i, int last)
 {
 	if (str [i] == '\"' && last == 0)
 	{
@@ -63,6 +63,7 @@ int	take_qvar(char *str, t_token **root)
 	int		i;
 	int		j;
 
+	i = 0;
 	comp = "!@#$*+-~./, \t\r\f\v\n\"()";
 	while (str[++i])
 	{
@@ -74,13 +75,34 @@ int	take_qvar(char *str, t_token **root)
 	return (i);
 }
 
+int	take_colon(char *str, t_token **root)
+{
+	int	i;
+
+	i = 0;
+	if (*str == '\"')
+		return (take_dquote(str, root));
+	add_item(str, str + 1, SQUOTE, root);
+	str++;
+	while (str[i] != '\'' && str[i])
+		i++;
+	if (str[i] == '\'')
+	{
+		add_item(str, str + i, WORD, root);
+		add_item(str + i, str + i + 1, SQUOTE, root);
+	}
+	else if (!str[i])
+		return (unclosed_quote(root), (i + 1));
+	return (i + 2);
+}
+
 void	*add_item(char *start, char *end, int flag, t_token **root)
 {
 	char	*str;
 	int		i;
 
 	i = -1;
-	str = (char *)ft_malloc(&g.adrs, calc_size(start, end), 1);
+	str = (char *)ft_malloc(&g_global.adrs, calc_size(start, end), 1);
 	if (!str)
 		return (NULL);
 	while (start != end)
