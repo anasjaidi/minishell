@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:38:05 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/08/15 14:42:05 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/08/15 14:47:18 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	herdoc(char *del)
 	{
 		line = readline("herdoc >");
 		if (!line)
-			return -1;
+			break ;
 		if (!ft_strcmp(del, line))
 			break ;
 		write(fd[1], line, ft_strlen(line));
