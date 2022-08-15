@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 21:26:50 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 18:57:34 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/08/15 14:43:06 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ex_redir(t_redir *root)
 	int	pid;
 	int	status;
 
+	if (root->dst < 0)
+		return ;
 	fd = open(root->filename, root->mode, S_IRUSR | S_IWUSR);
 	pid = fork();
 	if (!pid)

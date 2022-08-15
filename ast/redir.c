@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/25 17:38:05 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 18:34:05 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/08/15 14:42:05 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	herdoc(char *del)
 	while (1)
 	{
 		line = readline("herdoc >");
+		if (!line)
+			return -1;
 		if (!ft_strcmp(del, line))
 			break ;
 		write(fd[1], line, ft_strlen(line));
@@ -66,8 +68,8 @@ void	get_rdr_utils(t_token **head, t_command **root)
 t_tree	*get_rdr(t_token **head, t_tree *n)
 {
 	t_tree		*next;
-	t_cmd		*next2;
 	t_tree		*ret;
+	t_cmd			*next2;
 
 	ret = NULL;
 	if (!n)
@@ -89,4 +91,5 @@ t_tree	*get_rdr(t_token **head, t_tree *n)
 		return (ret);
 	else
 		return (next);
+	(void)next2;
 }

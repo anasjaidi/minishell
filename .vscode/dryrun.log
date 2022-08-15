@@ -1,0 +1,89 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/ajaidi/Documents/minishell'
+gcc -Wall -Wextra -Werror -c minishell.c -o minishell.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c collector_linkedlist.c -o collector_linkedlist.o -I /opt/homebrew/opt/readline/include -I.
+gcc -Wall -Wextra -Werror -c ast/ast_command.c -o ast/ast_command.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ast/ast_conecters.c -o ast/ast_conecters.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ast/ast.c -o ast/ast.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ast/redir.c -o ast/redir.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ast/display.c -o ast/display.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ast/ast_linkedlist.c -o ast/ast_linkedlist.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ast/ast_structures_geters.c -o ast/ast_structures_geters.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/token_conecters.c -o parser/token_conecters.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/token.c -o parser/token.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/token_string.c -o parser/token_string.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/token_quotes.c -o parser/token_quotes.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/parser_linkedlist.c -o parser/parser_linkedlist.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/delete_quotes.c -o parser/delete_quotes.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c parser/token_utils.c -o parser/token_utils.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c syntax/syntax.c -o syntax/syntax.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c syntax/syntax_utils.c -o syntax/syntax_utils.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c env/env.c -o env/env.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c env/env_geters.c -o env/env_geters.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c history.c -o history.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_atoi.c -o libft/ft_atoi.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_itoa.c -o libft/ft_itoa.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_strlen.c -o libft/ft_strlen.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_strjoin.c -o libft/ft_strjoin.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_split.c -o libft/ft_split.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_putstr_fd.c -o libft/ft_putstr_fd.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_strcmp.c -o libft/ft_strcmp.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_strncmp.c -o libft/ft_strncmp.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c libft/ft_strdup.c -o libft/ft_strdup.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/echo.c -o builtins/echo.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/cd.c -o builtins/cd.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/env.c -o builtins/env.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/exit.c -o builtins/exit.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/pwd.c -o builtins/pwd.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/export.c -o builtins/export.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c builtins/unset.c -o builtins/unset.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ex/ex.c -o ex/ex.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ex/excommand.c -o ex/excommand.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ex/expander.c -o ex/expander.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ex/transfer.c -o ex/transfer.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror -c ex/signal.c -o ex/signal.o -I /opt/homebrew/opt/readline/include -I.
+ 
+gcc -Wall -Wextra -Werror minishell.o collector_linkedlist.o ast/ast_command.o ast/ast_conecters.o ast/ast.o ast/redir.o ast/display.o ast/ast_linkedlist.o ast/ast_structures_geters.o parser/token_conecters.o parser/token.o parser/token_string.o parser/token_quotes.o parser/parser_linkedlist.o parser/delete_quotes.o parser/token_utils.o syntax/syntax.o syntax/syntax_utils.o env/env.o env/env_geters.o history.o libft/ft_atoi.o libft/ft_itoa.o libft/ft_strlen.o libft/ft_strjoin.o libft/ft_split.o libft/ft_putstr_fd.o libft/ft_strcmp.o libft/ft_strncmp.o libft/ft_strdup.o builtins/echo.o builtins/cd.o builtins/env.o builtins/exit.o builtins/pwd.o builtins/export.o builtins/unset.o ex/ex.o ex/excommand.o ex/expander.o ex/transfer.o ex/signal.o -L /opt/homebrew/opt/readline/lib -lreadline -o minishell
+ 
+make: Leaving directory `/Users/ajaidi/Documents/minishell'
+ 
