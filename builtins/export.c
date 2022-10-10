@@ -6,7 +6,7 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 22:48:58 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 22:20:27 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/09/29 00:40:28 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	display_exports(void)
 		ft_putstr_fd(env->key, 1);
 		ft_putstr_fd("=\"", 1);
 		ft_putstr_fd(env->value, 1);
-		ft_putstr_fd("\"\n", 1);
+		ft_putstr_fd("\n\"", 1);
 		env = env->next;
 	}
 	g_global.status = 0;
@@ -61,7 +61,7 @@ void	display_exports(void)
 int	ft_export_utils(char **argv, char **spl, int *status, int i)
 {
 	t_env	*node;
-
+	printf("%c\n", spl[0][ft_strlen(spl[0]) - 1]);
 	if (!spl || (spl[0][0] == '+') || argv[i][0] == '=' || \
 	(spl[0][ft_strlen(spl[0]) - 1] == '+' \
 	&& argv[i][ft_strlen(argv[i]) - 1] == '='))

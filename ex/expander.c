@@ -54,7 +54,7 @@ t_command	*get_wild_value_utils(void)
 	item = readdir(dir);
 	while (item)
 	{
-		if (item->d_name != '.')
+		if (item->d_name[0] != '.')
 			append_in_cmdend(&head, item->d_name, 5);
 		item = readdir(dir);
 	}

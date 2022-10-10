@@ -1,7 +1,9 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ajaidi/Documents/minishell'
 gcc -Wall -Wextra -Werror -c minishell.c -o minishell.o -I /opt/homebrew/opt/readline/include -I.
+ 
 gcc -Wall -Wextra -Werror -c collector_linkedlist.c -o collector_linkedlist.o -I /opt/homebrew/opt/readline/include -I.
+ 
 gcc -Wall -Wextra -Werror -c ast/ast_command.c -o ast/ast_command.o -I /opt/homebrew/opt/readline/include -I.
  
 gcc -Wall -Wextra -Werror -c ast/ast_conecters.c -o ast/ast_conecters.o -I /opt/homebrew/opt/readline/include -I.

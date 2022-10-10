@@ -6,19 +6,18 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 23:33:51 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 22:20:11 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/10/11 00:07:42 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	check_dir(char **argv, int s, char *cur)
+void	check_dir(char **argv, int s, char *old_cur)
 {
 	char	buf[255];
+	char	*cur;
 	t_env	*node;
 
-	getcwd(buf, 255);
-	cur = ft_strdup(buf);
 	if (s < 0)
 	{
 		ft_putstr_fd("bash: cd: ", 2);
@@ -30,7 +29,7 @@ void	check_dir(char **argv, int s, char *cur)
 	{
 		node = get_env_node("OLDPWD");
 		if (node)
-			node->value = cur;
+			node->value = old_cur;
 		node = get_env_node("PWD");
 		getcwd(buf, 255);
 		cur = ft_strdup(buf);
