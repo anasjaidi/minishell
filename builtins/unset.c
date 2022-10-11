@@ -6,13 +6,13 @@
 /*   By: ajaidi <ajaidi@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/02 23:54:26 by ajaidi            #+#    #+#             */
-/*   Updated: 2022/07/08 16:21:48 by ajaidi           ###   ########.fr       */
+/*   Updated: 2022/10/11 00:42:18 by ajaidi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_unset(char **argv)
+void	ft_unset(char **argv) // ["unset", "PWD", "OLDPWD", "NOT", "PATH"]
 {
 	int	i;
 
